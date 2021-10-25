@@ -6,6 +6,7 @@ const createServer = () => {
   app.listen(port, () => {
     console.log(`Server connected in the port ${port}`)
   })
+  return app
 }
 
 module.exports = createServer
