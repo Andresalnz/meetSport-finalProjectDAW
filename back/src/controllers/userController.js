@@ -43,9 +43,40 @@ router.get('/:name',(request, response) => {
 })
 
 //Update user
+router.put('/', (request, response) => {
+  const {body} = request
+  console.log(body)
+  const {id,name,mail} = body
+  const newUserInfo = new userModel({
+    name,
+    mail
+  })
+    
+    userModel.findByIdAndUpdate({_id:id},newUserInfo)
+    .then(result => {
+      response.send('Thank')
+    })
+    .catch(err => {
+      response.send(err.name)
+    })
+
+})
 
 
 //Delete user
+router.delete('/', (request,response) => {
+  const {body} = request
+  const {id} = body
+  console.log('esto', id)
+  userModel.findByIdAndDelete({id})
+  .then(result => {
+    response.status(202).send(result)
+  })
+  .catch(err => {
+    response.status(404).send("no se ha borrado")
+  })
+})
+
 
 module.exports = router
 

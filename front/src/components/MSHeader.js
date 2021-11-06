@@ -1,6 +1,7 @@
 import { Header, Button, Box, Anchor, Nav, Text } from 'grommet';
 import { Yoga } from 'grommet-icons';
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 const MSHeaderAnchor = styled(Anchor)`
   display: flex;
@@ -45,13 +46,15 @@ export default function MSHeader() {
           label="Meet|Sports"  />
       </Box>
       <Nav align="center" direction="row">
-        <Button
-          primary
-          color="brand"
-          pad="small"
-          label={<Text size="medium" color="light-1" weight="bold" >Create Request</Text>}
-          onClick={() => {}}
-        />
+        <Link to="/create-request">
+          <Button
+            primary
+            color="brand"
+            pad="small"
+            label={<Text size="medium" color="light-1" weight="bold" >Create Request</Text>}
+            onClick={() => {}}
+          />
+        </Link>
         {userItems.map(item => (
           <Anchor href={item.href} label={item.label} key={item.label} color="dark-1" />
         ))}
