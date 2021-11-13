@@ -11,20 +11,24 @@ import {
   Image,
   Paragraph,
 } from 'grommet';
+import useListRequest  from '../hooks/useListRequest'
 
 import { FormDown, FormUp, ShareOption } from 'grommet-icons';
+import sendRequest from  '../hooks/useCreateRequest';
 
-export default function MSCard() {
-  
+export default function MSCard({title}) {
+
+  const list = useListRequest()
   const [open, setOpen] = useState(false);
 
-  const ExpandButton = ({ ...rest }) => {
+  const ExpandButton = (props) => {
+    
     const Icon = open ? FormUp : FormDown;
     return (
       <Button
         hoverIndicator="light-4"
         icon={<Icon color="brand" />}
-        {...rest}
+        {...props}
       />
     );
   };
@@ -40,8 +44,10 @@ export default function MSCard() {
         />
       </CardBody>
       <Box pad={{ horizontal: 'medium' }} responsive={false}>
-        <Heading level="3" margin={{ vertical: 'medium' }}>
-          Bridge
+        <Heading level="3" margin={{ vertical: 'medium' }} >
+        {
+          title.map(i=>i)
+        }
         </Heading>
         <Paragraph margin={{ top: 'none' }}>
           A structure carrying a road, path, railroad, or canal across a

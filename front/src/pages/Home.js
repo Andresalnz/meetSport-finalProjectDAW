@@ -7,18 +7,22 @@ import {
 
 import { Outlet } from 'react-router-dom';
 import MSCard from '../components/MSCard';
+import useListRequest  from '../hooks/useListRequest'
+
 
 const cards = Array(20)
   .fill()
   .map((_, i) => <Text key={i}>{`Card ${i}`}</Text>);
 
 export default function Home() {
-  const size = useContext(ResponsiveContext);
 
+  const size = useContext(ResponsiveContext);
+  const list = useListRequest()
+  
   return <>
       <Grid columns={size !== 'small' ? 'medium' : '100%'} gap="small">
         {cards.map((card, index) => (
-          <MSCard></MSCard>
+          <MSCard title={list} ></MSCard>
         ))}
       </Grid>
       <Outlet />

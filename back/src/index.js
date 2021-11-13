@@ -14,12 +14,11 @@ app.use (express.json());
 app.use(cors({
   origin: ['http://localhost:3000']
 }));
-app.use ('/', userRouter)
-app.use ('/search', userRouter)
-app.use ('/account', userRouter)
+
+app.use ('/user', userRouter)
+
+
 
 app.use('/publications', publicationsRouter)
-//app.use('/', publicationRouter)
-// app.use('/history', publicationRouter)
 
 

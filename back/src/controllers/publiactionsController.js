@@ -1,10 +1,13 @@
 const publicationModel = require('../models/PublicationsModel')
 const userModel = require('../models/UserModel')
 const router = require('express').Router()
+const mongoose = require('mongoose')
+
 
 
 router.post('/',  (request, response, next) => {
   const {body} = request
+  console.log(body)
   const {requestTitle,
         requestDescription,
         requestLocation,
@@ -16,12 +19,12 @@ router.post('/',  (request, response, next) => {
   //const user = userModel.findById({userId})
 
   const newPublication = new publicationModel({
-    title: requestTitle,
-    description: requestDescription,
-    location: requestLocation,
-    day: requestDate,
-    hour: requestHour,
-    numberPeople: requestParticipants,
+    requestTitle,
+    requestDescription,
+    requestLocation,
+    requestDate,
+    requestHour,
+    requestParticipants,
     //users: user._id
   })
 
@@ -34,7 +37,7 @@ router.post('/',  (request, response, next) => {
   })
   .catch(err => {
     console.log(err.name)
-    next(error)
+    //next(error)
   })
 })
 
@@ -49,6 +52,17 @@ router.get('/:id', (request, response) => {
   .catch(err => {
     response.send (err.name)
   })
+})
+
+router.get('/', (request, response) => {
+  publicationModel.find({}).then(result => {
+    console.log(result)
+    response.send(result)
+  })
+  .catch(err => {
+    response.send (err.name)
+  })
+  
 })
 
 
