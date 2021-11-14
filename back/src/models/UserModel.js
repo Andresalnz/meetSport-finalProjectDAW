@@ -6,7 +6,7 @@ const userSchema = new Schema ({
   mail: String,
   password: String,
   ubicacion: String,
-  deportes: String,
+  deportes: [String],
   //image:String,
   publications: [{ 
     type: Schema.Types.ObjectId,

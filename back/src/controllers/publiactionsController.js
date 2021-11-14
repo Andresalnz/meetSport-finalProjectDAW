@@ -7,37 +7,33 @@ const mongoose = require('mongoose')
 
 router.post('/',  (request, response, next) => {
   const {body} = request
-  console.log(body)
-  const {requestTitle,
-        requestDescription,
-        requestLocation,
-        requestDate,
-        requestHour,
-        requestParticipants,
+  const {title,
+        description,
+        location,
+        date,
+        hour,
+        participants,
         userId} = body
 
   //const user = userModel.findById({userId})
 
   const newPublication = new publicationModel({
-    requestTitle,
-    requestDescription,
-    requestLocation,
-    requestDate,
-    requestHour,
-    requestParticipants,
+    title,
+    description,
+    location,
+    date,
+    hour,
+    participants,
     //users: user._id
   })
 
   newPublication.save()
-  .then(result => {
-    console.log('Si')
-    response.status(202).send(result)
+  .then(result => { response.status(202).send(result)
     //user.publicationModel = user.publications.concat(newPublication._id)
     //user.save()   
   })
-  .catch(err => {
-    console.log(err.name)
-    //next(error)
+  .catch(error => {
+    next(error)
   })
 })
 
@@ -56,41 +52,33 @@ router.get('/:id', (request, response) => {
 
 router.get('/', (request, response) => {
   publicationModel.find({}).then(result => {
-    console.log(result)
     response.send(result)
   })
-  .catch(err => {
-    response.send (err.name)
-  })
-  
+  .catch(err => { response.send (err.name) }) 
 })
 
 
-router.put('/:id', (request, response) => {
-  
-  const {id} = request.params
-  console.log(id)
+router.put('/update', (request, response) => {
   const {body} = request
-  const {title,
-        description,
-        location,
-        place,
-        day,
-        hour,
-        numberPeople,
+  const { id,
+          title,
+          description,
+          location,
+          date,
+          hour,
+          participants,
         } = body
-  const newPublicationInfo = new publicationModel({
+  const newPublicationInfo = {
+    id,
     title,
     description,
     location,
-    place,
-    day,
+    date,
     hour,
-    numberPeople})
-  console.log(newPublicationInfo)
-  publicationModel.findByIdAndUpdate(id, {newPublicationInfo}, {new: true})
+    participants
+    }
+  publicationModel.findOneAndUpdate({_id:id}, newPublicationInfo)
   .then(result => {
-    console.log('e')
     response.send(result)
   })
   .catch(error => {
@@ -98,4 +86,11 @@ router.put('/:id', (request, response) => {
   })
 })
 
+
+router.delete('/delete', (request,response) => {
+  const {id} = request.body
+  publicationModel.findByIdAndDelete({_id:id})
+  .then(result => { response.status(202).send(result) })
+  .catch(err => { response.status(404).send("no se ha borrado") })
+})
  module.exports = router

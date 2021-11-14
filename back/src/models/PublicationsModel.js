@@ -1,13 +1,13 @@
 const {Schema,model} = require('mongoose')
 
 const publicationSchema = new Schema ({
-  title:String,
+  title: String,
   description: String,
   location: String,
-  place:String,
+  place: String,
   day: Date,
   hour: Date,
-  numberPeople: Number,
+  participants: Number,
   users:[{
     type: Schema.Types.ObjectId,
     ref: 'User'

@@ -4,13 +4,7 @@ const router = require('express').Router()
 //new user
 router.post('/signup', (request, response, next) => {
   const {body} = request
-  const {username,
-        name,
-        mail,
-        password,
-        ubicacion,
-        deportes} = body
-
+  const {username, name, mail, password, ubicacion, deportes} = body
   const newUser = new userModel({
     username,
     name,
@@ -20,61 +14,54 @@ router.post('/signup', (request, response, next) => {
     deportes
   })
 
-  newUser.save()
-  .then(result => {
-    response.send(result)
-  })
-  .catch(err => {
-    console.log(err.name)
-    next(error)
-  })
+  newUser.save().then(result => { response.status(200).send(result) })
+  .catch(err => { next(error) })
 })
+
+
+//list users
+router.get('/',(request, response) => {
+  userModel.find({})
+  .then(result => { response.status(200).json(result) })
+  .catch(err => { response.send(err) })
+})
+
+
 
 //search user by name
 router.get('/:name',(request, response) => {
   const {name} = request.params
   userModel.find({name:name})
-  .then(result => {
-    response.status(200).json(result)
-  })
-  .catch(err => {
-    response.send('No hay nada')
-  })
+  .then(result => { response.status(200).json(result) })
+  .catch(err => { response.send(err.name) })
 })
 
+
 //Update user
-router.put('/', (request, response) => {
+router.put('/account', (request, response) => {
   const {body} = request
   console.log(body)
-  const {id,name,mail} = body
-  const newUserInfo = new userModel({
+  const {id, username, name, mail, ubicacion, deportes} = body
+  const newUserInfo = {
+    username,
     name,
-    mail
-  })
-    
-    userModel.findByIdAndUpdate({_id:id},newUserInfo)
-    .then(result => {
-      response.send('Thank')
-    })
-    .catch(err => {
-      response.send(err.name)
-    })
+    mail,
+    ubicacion,
+    deportes
+  } 
+  userModel.findOneAndUpdate({_id:id}, newUserInfo)
+  .then(result => { response.status(200).send(result) })
+  .catch(err => { response.send(err.name) })
 
 })
 
 
 //Delete user
-router.delete('/', (request,response) => {
-  const {body} = request
-  const {id} = body
-  console.log('esto', id)
-  userModel.findByIdAndDelete({id})
-  .then(result => {
-    response.status(202).send(result)
-  })
-  .catch(err => {
-    response.status(404).send("no se ha borrado")
-  })
+router.delete('/account', (request,response) => {
+  const {id} = request.body
+  userModel.findByIdAndDelete({_id:id})
+  .then(result => { response.status(202).send(result) })
+  .catch(err => { response.status(404).send("no se ha borrado") })
 })
 
 
