@@ -1,23 +1,26 @@
+const { application } = require('express')
 const userModel = require('../models/UserModel')
 const router = require('express').Router()
+const bcrypt = require ('bcrypt')
 
-//new user
-router.post('/signup', (request, response, next) => {
+//Create user
+router.post('/signup', async (request, response, next) => {
   const {body} = request
-  const {username, name, mail, password, ubicacion, deportes} = body
+  console.log("nuevo usuario", body)
+  const {username, password, mail, location, sports, image} = body
+  const salt = 10
+  const passwordHash = await bcrypt.hash(password, salt)
   const newUser = new userModel({
     username,
-    name,
+    passwordHash,
     mail,
-    password,
-    ubicacion,
-    deportes
+    location,
+    sports,
+    image
   })
-
   newUser.save().then(result => { response.status(200).send(result) })
-  .catch(err => { next(error) })
+  .catch(err => { next(err) })
 })
-
 
 //list users
 router.get('/',(request, response) => {
