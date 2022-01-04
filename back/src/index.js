@@ -11,8 +11,8 @@ const handleError = require ('./middleware/handleError')
 
 database()
 
-app.use('/static',express.static('public'))
 app.use (express.json());
+//app.use(express.static('public'))
 app.use(cors({
   origin: ['http://localhost:3000']
 }));

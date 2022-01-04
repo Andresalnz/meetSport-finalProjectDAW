@@ -18,15 +18,30 @@ router.post('/signup', async (request, response, next) => {
     sports,
     image
   })
+  //TODO: - Subida de imagen
   newUser.save().then(result => { response.status(200).send(result) })
   .catch(err => { next(err) })
+})
+
+//Login user
+router.post('/signin',  async (request, response, next) => {
+  const {body} = request
+  const {username,password} = body
+  userModel.find({username:username}).then(result => {
+    if (bcrypt.compareSync(password,result[0].passwordHash)){
+      response.status(200).send(result)
+    } else {
+      response.status(401).send('Incorrect Password or username')
+    }
+  })
+  .catch(error => next(error))
 })
 
 //list users
 router.get('/',(request, response) => {
   userModel.find({})
   .then(result => { response.status(200).json(result) })
-  .catch(err => { response.send(err) })
+  .catch(err => { console.log(err) })
 })
 
 
