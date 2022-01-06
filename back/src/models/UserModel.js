@@ -30,7 +30,7 @@ const userSchema = new Schema ({
   sports: {
     type: [String],
     required: 'Sport is required',
-    trim: true,
+   // trim: true,
     lowercase: true,
 
   },

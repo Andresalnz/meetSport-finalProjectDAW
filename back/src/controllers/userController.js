@@ -6,7 +6,6 @@ const bcrypt = require ('bcrypt')
 //Create user
 router.post('/signup', async (request, response, next) => {
   const {body} = request
-  console.log("nuevo usuario", body)
   const {username, password, mail, location, sports, image} = body
   const salt = 10
   const passwordHash = await bcrypt.hash(password, salt)
@@ -37,51 +36,40 @@ router.post('/signin',  async (request, response, next) => {
   .catch(error => next(error))
 })
 
-//list users
-router.get('/',(request, response) => {
-  userModel.find({})
-  .then(result => { response.status(200).json(result) })
-  .catch(err => { console.log(err) })
-})
-
-
-
-//search user by name
-router.get('/:name',(request, response) => {
-  const {name} = request.params
-  userModel.find({name:name})
-  .then(result => { response.status(200).json(result) })
-  .catch(err => { response.send(err.name) })
-})
-
-
 //Update user
 router.put('/account', (request, response) => {
   const {body} = request
-  console.log(body)
-  const {id, username, name, mail, ubicacion, deportes} = body
-  const newUserInfo = {
+  const {id, username, mail, location, sports} = body
+  const options = { new: true, rawResult: true } //rawResult: Para verificar que mongoDB encontró y actualizó el documento
+  const filter = { _id:id }
+  const updateUser = {
     username,
-    name,
     mail,
-    ubicacion,
-    deportes
+    location,
+    sports
   } 
-  userModel.findOneAndUpdate({_id:id}, newUserInfo)
+  userModel.findOneAndUpdate(filter, updateUser, options)
   .then(result => { response.status(200).send(result) })
   .catch(err => { response.send(err.name) })
-
 })
 
 
 //Delete user
-router.delete('/account', (request,response) => {
+router.delete('/account', (request,response, next) => {
   const {id} = request.body
   userModel.findByIdAndDelete({_id:id})
-  .then(result => { response.status(202).send(result) })
-  .catch(err => { response.status(404).send("no se ha borrado") })
+  .then(result => { response.status(200).send(result) })
+  .catch(error => next(error))
 })
 
+
+//search user by name or sport
+router.get('/:search',(request, response) => {
+  const {search} = request.params
+  userModel.find({$or:[{username:search},{sports:search}]})
+  .then(result => { response.status(200).send(result) })
+  .catch(err => { response.send(err.name) })
+})
 
 module.exports = router
 
