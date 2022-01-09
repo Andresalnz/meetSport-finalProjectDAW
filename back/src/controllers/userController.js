@@ -19,7 +19,7 @@ router.post('/signup', async (request, response, next) => {
   })
   //TODO: - Subida de imagen
   newUser.save().then(result => { response.status(200).send(result) })
-  .catch(err => { next(err) })
+  .catch(error => { next(error) })
 })
 
 //Login user

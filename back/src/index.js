@@ -19,6 +19,6 @@ app.use(cors({
 
 
 app.use ('/user', userRouter)
-//app.use('/publications', publicationsRouter)
+app.use('/publication', publicationsRouter)
 app.use(handleError)
 

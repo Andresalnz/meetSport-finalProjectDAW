@@ -1,8 +1,8 @@
 module.exports =  (error, request, response, next) => {
-    console.log(error._message)
+    console.log(error.message)
     switch (error.name) {
         case "ValidationError":
-            response.status(400).send({error: "Some data is misspelled or does not exist"})
+            response.status(400).send({error: error.message})
             break
         case "Error":
             response.status(400).send({error: "Por favor, rellene todos los datos"})
