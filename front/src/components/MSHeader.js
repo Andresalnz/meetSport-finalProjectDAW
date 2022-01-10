@@ -1,15 +1,15 @@
 import { Header, Button, Box, Anchor, Nav, Text } from 'grommet';
 import { Yoga } from 'grommet-icons';
 import styled from 'styled-components';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const MSHeaderAnchor = styled(Anchor)`
   display: flex;
 `
 
 const items = [
-  { label: <Text size="medium" >Home</Text>, href: '#' },
-  { label: <Text size="medium" >Sign up</Text>, href: '#' },
+  { label: <Text size="medium" >Home</Text>, href: "/home" },
+  { label: <Text size="medium" >Sign up</Text>, href: "/sign-up" },
 ];
 
 const userItems = [
@@ -55,8 +55,9 @@ export default function MSHeader() {
             onClick={() => {}}
           />
         </Link>
-        {userItems.map(item => (
-          <Anchor href={item.href} label={item.label} key={item.label} color="dark-1" />
+        {items.map(item => (
+
+          <NavLink exact to={item.href} style={(isActive) => ({color: isActive ? "green" : "black", textDecoration: "none"}) }>{item.label}</NavLink>
         ))}
       </Nav>
   </Header>

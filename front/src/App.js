@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from './Layout';
 import Home from './pages/Home';
 import CreateRequest from './pages/CreateRequest';
+import SignUp from './pages/SignUp';
 
 const theme = {
   global: {
@@ -48,6 +49,7 @@ function App() {
             <Route path="create-request" element={<Home />} >
               <Route index element={<CreateRequest />} />
             </Route>
+            <Route path="sign-up" element = {<SignUp />}></Route>
           </Route>
         </Routes>
       </Router>
