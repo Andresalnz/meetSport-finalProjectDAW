@@ -51,7 +51,7 @@ function App() {
               <Route index element={<CreateRequest />} />
             </Route>
             <Route path="sign-up" element = {<SignUp />}></Route>
-            <Route path="login" element = {<Login />}></Route>
+            <Route path="login" element = {<SignIn />}></Route>
           </Route>
         </Routes>
       </Router>
