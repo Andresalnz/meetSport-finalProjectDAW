@@ -4,15 +4,19 @@ const publicationSchema = new Schema ({
   title: {
     type: String,
     required: 'Titulo obligatorio',
-    maxlength: [100, "Pasado el limite de palabras"]
+    maxlength: [30, "Pasado el limite de palabras"],
+    trim: true,
   },
   description: {
     type: String,
-    required: true
+    maxlength: [100, "Pasado el limite de palabras"],
+    trim: true,
+    required: 'Descripcion obligatoria'
   },
   place: {
     type: String,
-    required: true
+    trim: true,
+    required: true,
   },
   location: {
     type: String,
@@ -20,20 +24,16 @@ const publicationSchema = new Schema ({
   },
   date: {
     type: Date,
-    required: false,
-  },
-  hour: {
-    type: Date,
-    required: false,
+    required: 'Fecha obligatoria',
   },
   participants: {
     type: Number,
-    required: true,
+    required: 'Número de participantes obligatorio',
     max: [20,"Demasiadas personas"]
   },
   price: {
     type: Number,
-    required: true,
+    required: 'Precio obligatorio',
   },
   users:[{
     type: Schema.Types.ObjectId,
