@@ -35,10 +35,10 @@ const publicationSchema = new Schema ({
     type: Number,
     required: 'Precio obligatorio',
   },
-  users:[{
+  user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }]
+  }
 })
 
 publicationSchema.set('toJSON',{

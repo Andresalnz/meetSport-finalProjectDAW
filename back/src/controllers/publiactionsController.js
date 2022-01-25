@@ -15,20 +15,31 @@ router.post('/new',  (request, response, next) => {
     location,
     date,
     participants,
-    price} = body
-    //dia, mes, año y hora en date
+    price,
+    userId
+  } = body
+    
+  const user = userModel.findById(userId)
+  console.log(user);
   const newPublication = new publicationModel({
     title,
     description,
-    place,
+    place,  
     location,
     date,
     participants,
-    price
+    price,
+    user: user._id
   })
-  console.log(newPublication);
+  console.log('nuevo',newPublication);
   //El formateo de la fecha se hace en el front o en el back o en los dos?
-  newPublication.save().then(result => { response.status(200).send(result) })
+  newPublication.save()
+  .then(result => { 
+    
+    user.publications = user.publications.concat(result._id)
+    user.save()
+    response.status(200).send(result)
+   })
   .catch(error => { next(error) })
 })
 
