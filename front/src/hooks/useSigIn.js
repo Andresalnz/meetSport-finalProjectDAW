@@ -6,6 +6,7 @@ export default function useSignIn() {
 
   const url = 'http://localhost:3001/user/signin'
   const userSignIn =  (data) => {
+    setSignInError({error:false, message:'OK'})
     fetch(url, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
@@ -17,7 +18,7 @@ export default function useSignIn() {
     })
     .then((result) =>{
       if (result.ok) {
-        setSignInError({error:false, message:'Error login'})
+        setSignInError({error:false, message:'OK'})
         navigate('/')
       } else {
         setSignInError({error:true, message:'Error login'})

@@ -1,7 +1,6 @@
-import {Text,Box, Form, FormField, Heading, TextInput, Button } from "grommet";
-import { Add, Google } from "grommet-icons";
+import {Box, Form, FormField, Heading, TextInput, Button, Notification } from "grommet";
+import { Google } from "grommet-icons";
 import { Link } from "react-router-dom"
-import {useNavigate,useLocation} from 'react'
 import useSignIn from '../hooks/useSigIn'
 
 export default function Login(props) {
@@ -12,14 +11,14 @@ export default function Login(props) {
         <Box fill align="center" justify="center" width="medium">
            
             {
-                signInErrorState.error ?  <Text>Error</Text> : false
+                signInErrorState.error && <Notification toast status='critical'  title="Email o password incorrecto"/> 
             }
             <Box width="medium">
                 <Heading>
-                    Sign In
+                    Entra
                 </Heading>
                 <Form onSubmit={({value}) => signIn(value)}>
-                    <FormField name="username" label="Nombre de usuario o email" htmlFor="username" required>
+                    <FormField name="username" label="Nombre de usuario o email" htmlFor="username"  required messages={{invalid:"inva",required:"requir"}} > 
                         <TextInput id="username" name="username" placeholder="Nombre de usuario o email"> 
                         </TextInput>
                     </FormField>
@@ -31,7 +30,7 @@ export default function Login(props) {
                     <Box align="center" pad="medium">
                         <Button primary 
                             type="submit"
-                            label="Sig In" 
+                            label="Entra" 
                             fill="horizontal" 
                             size="large" 
                             borderWidth ="2000px"       
