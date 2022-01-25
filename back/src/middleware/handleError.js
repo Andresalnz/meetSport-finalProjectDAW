@@ -5,12 +5,12 @@ module.exports =  (error, request, response, next) => {
             response.status(400).send({error: error.message})
             break
         case "Error":
-            response.status(400).send({error: "Por favor, rellene todos los datos"})
+            response.status(400).send({error: error.message})
             break
         case "TypeError":
-            response.status(400).send({error: "Incorrecta contraseña o usuario"})
+            response.status(400).send({error: error.message})
             break
         case "CastError":
-            response.status(404).send({error: "No se ha podido borrar su cuenta"})
+            response.status(404).send({error: error.message})
     }
 }
