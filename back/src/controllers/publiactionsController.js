@@ -106,4 +106,15 @@ router.get('/:id', (request, response) => {
     response.send (err.name)
   })
 })
+
+router.get('/', (request, response, next) => {
+  publicationModel.find()
+  .then(result => {
+    response.send(result)
+  })
+  .catch(err => {
+    next(err.name)
+  })
+})
+
  module.exports = router
