@@ -6,6 +6,7 @@ import {
   Card,
   CardBody,
   CardFooter,
+  CardHeader,
   Collapsible,
   Heading,
   Image,
@@ -16,7 +17,7 @@ import useListRequest  from '../hooks/useListRequest'
 import { FormDown, FormUp, ShareOption } from 'grommet-icons';
 import sendRequest from  '../hooks/useCreateRequest';
 
-export default function MSCard({title}) {
+export default function MSCard({title, description, location, date, participants, price}) {
 
   const list = useListRequest()
   const [open, setOpen] = useState(false);
@@ -32,47 +33,44 @@ export default function MSCard({title}) {
       />
     );
   };
-
-
+  
   return <>
-    <Card animation={{type: 'fadeIn', duration: 1000}} pad="large" elevation="small" >
-      <CardBody height="small">
-        <Image
-          fit="cover"
-          src="//v2.grommet.io/assets/IMG_4245.jpg"
-          a11yTitle="bridge"
-        />
-      </CardBody>
-      <Box pad={{ horizontal: 'medium' }} responsive={false}>
-        <Heading level="3" margin={{ vertical: 'medium' }} >
-        {
-          title.map(i=>i)
-        }
-        </Heading>
-        <Paragraph margin={{ top: 'none' }}>
-          A structure carrying a road, path, railroad, or canal across a
-          river, ravine, road, railroad, or other obstacle.
-        </Paragraph>
+    <Card pad='small' gap='small' background={{color:'white'}}  round>
+      <CardHeader direction='column' align='start' margin={{top:'small' }}>
+        <Box direction='column' height='xsmall' width='xsmall'  >
+          <Image fit='cover'  src="//v2.grommet.io/assets/Wilderpeople_Ricky.jpg" ></Image>
+          <Paragraph  margin={{top:'small', left:'small', bottom:'none', right:'none'}} size='large'>@Andy</Paragraph>
+        </Box>    
+        {/* <hr width="90%"/> */}
+      </CardHeader>
+      <Box hoverIndicator={{
+        background: {
+          color: 'background-contrast',
+        },
+        elevation: 'medium',
+        }}
+        onClick={() => {
+          alert('clicked');
+        }}>
+        <CardBody margin={{horizontal:'small', vertical:'small'}}>
+          <Box margin={{vertical:'small'}} >
+            <Heading level="3" margin='none' >
+              Se busca gente para un partido de baloncesto
+            </Heading>
+          </Box>
+          <Paragraph size='medium' textAlign='justify' margin='none'>
+            Buscamos a personas para jugar un partido de baloncesto,
+            nos da igual el nivel que tenga.
+            Simplemente ganas de pasarlo bien
+          </Paragraph>
+        </CardBody>  
+        <CardFooter direction='column' margin={{horizontal:'small', bottom:'small'}} align='start'>
+          <Paragraph margin='none' color='#A9A9A9'>En Campo Hondo, Cádiz </Paragraph>
+          <Paragraph margin='none' color='#A9A9A9' >a las 21:00 el 6 de febrero</Paragraph>
+          <Paragraph margin='none' color='#A9A9A9'>Busco a 7 personas</Paragraph>
+          <Paragraph margin='none' color='#A9A9A9' >Precio: Gratis</Paragraph>
+        </CardFooter>
       </Box>
-      <CardFooter>
-        <Box direction="row" align="center" gap="small">
-          2/10
-          <Button icon={<ShareOption color="plain" />} hoverIndicator />
-          <Anchor
-            href="https://www.collinsdictionary.com/us/dictionary/english/bridge"
-            label="Learn More"
-          />
-        </Box>
-        <ExpandButton onClick={() => setOpen(!open)} />
-      </CardFooter>
-      <Collapsible open={open}>
-        <Paragraph margin="medium" color="dark-3">
-          The greatest bridge builders of antiquity were the ancient Romans.
-          The Romans built arch bridges and aqueducts that could stand in
-          conditions that would damage or destroy earlier designs. Some
-          stand today.
-        </Paragraph>
-      </Collapsible>
     </Card>
   </>
 }
