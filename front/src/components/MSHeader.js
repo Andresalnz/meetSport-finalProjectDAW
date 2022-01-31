@@ -2,6 +2,7 @@ import { Header, Button, Box, Anchor, Nav, Text } from 'grommet';
 import { Yoga } from 'grommet-icons';
 import styled from 'styled-components';
 import { Link, NavLink } from "react-router-dom";
+import useSignIn from '../hooks/useSigIn';
 
 const MSHeaderAnchor = styled(Anchor)`
   display: flex;
@@ -9,7 +10,8 @@ const MSHeaderAnchor = styled(Anchor)`
 
 const items = [
   { label: <Text size="medium" >Home</Text>, href: "/home" },
-  { label: <Text size="medium" >Sign up</Text>, href: "/sign-up" },
+  { label: <Text size="medium" >Sign in</Text>, href: "/login" },
+  { label: <Text size="medium" >Sign up</Text>, href: "/sign-up" }
 ];
 
 const userItems = [
@@ -26,6 +28,9 @@ const padHeader = {
 };
 
 export default function MSHeader() {
+
+  const signIn = useSignIn()
+
   return (
   <Header 
     animation="fadeIn"
@@ -49,16 +54,22 @@ export default function MSHeader() {
         <Link to="/create-request">
           <Button
             primary
-            color="brand"
+            color="#2874A6 "
             pad="small"
             label={<Text size="medium" color="light-1" weight="bold" >Create Request</Text>}
             onClick={() => {}}
           />
         </Link>
-        {items.map(item => (
-
-          <NavLink exact to={item.href} style={(isActive) => ({color: isActive ? "green" : "black", textDecoration: "none"}) }>{item.label}</NavLink>
-        ))}
+        {
+          signIn.error ? items.map(item => (
+            <NavLink exact to={item.href} style={(isActive) => ({color: isActive ? "green" : "black", textDecoration: "none"}) }>{item.label}</NavLink>
+          )) :
+          userItems.map(item => (
+            <NavLink exact to={item.href} style={(isActive) => ({color: isActive ? "black" : "green", textDecoration: "none"}) }>{item.label}</NavLink>
+          ))
+          
+        }
+        
       </Nav>
   </Header>
   );
