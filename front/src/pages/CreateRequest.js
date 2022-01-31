@@ -9,7 +9,8 @@ import {
   TextInput, 
   DateInput,
   MaskedInput,
-  Form
+  Form,
+  RadioButtonGroup,
 } from 'grommet';
 import useCreateRequest from '../hooks/useCreateRequest';
 import { useState } from 'react';
@@ -21,6 +22,7 @@ export default function CreateRequest() {
   const [dateValue, setDateValue] = useState('');
 
   return (
+    
     <Layer
       id="hello world"
       position="center"
@@ -40,10 +42,10 @@ export default function CreateRequest() {
             <TextArea id="requestDescription" name="requestDescription" placeholder="Nos hacen falta 3 tios más para un parti..." />
           </FormField>
           <FormField label="Location" name="requestLocation" htmlFor="select" required>
-            <TextInput id="requestLocation" name="requestLocation" placeholder="Campo hondo, Cádiz" />
+            <TextInput id="requestLocation" name="requestLocation" placeholder="Campo hondo" />
           </FormField>
-          
-            <Box gap="small" width="large" direction="row">
+          <RadioButtonGroup direction='row' name="cities" options={["Cádiz","Sevilla","Malaga","Almeria","Córdoba","Huelva","Jaén","Granada"]}></RadioButtonGroup>        
+            <Box gap="small" width="large" direction="row" margin={{vertical:'small'}}>
               <FormField label="Date & time" name="requestDate" htmlFor="requestDate" required>
                 <DateInput 
                   name="requestDate" 
@@ -132,6 +134,8 @@ export default function CreateRequest() {
         </Box>
         </Form>
       </Box>
+     
     </Layer>
+   
   );
 }
