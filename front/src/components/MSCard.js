@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { Add } from "grommet-icons";
 import {
+  Text,
   Anchor,
   Box,
   Button,
@@ -65,10 +67,11 @@ export default function MSCard({title, description, location, date, participants
           </Paragraph>
         </CardBody>  
         <CardFooter direction='column' margin={{horizontal:'small', bottom:'small'}} align='start'>
-          <Paragraph margin='none' color='#A9A9A9'>En Campo Hondo, Cádiz </Paragraph>
-          <Paragraph margin='none' color='#A9A9A9' >a las 21:00 el 6 de febrero</Paragraph>
-          <Paragraph margin='none' color='#A9A9A9'>Busco a 7 personas</Paragraph>
-          <Paragraph margin='none' color='#A9A9A9' >Precio: Gratis</Paragraph>
+          <Text margin='none' weight='bold'>En Campo Hondo, Cádiz </Text>
+          <Text margin='none' weight='bold' >a las 21:00 el 6 de febrero</Text>
+          <Text margin='none' weight='bold'>Busco a 7 personas</Text>
+          <Text margin='none' weight='bold' >Precio: Gratis</Text>
+          <Button primary icon={<Add />} label="Add" onClick={() => {}} />
         </CardFooter>
       </Box>
     </Card>
