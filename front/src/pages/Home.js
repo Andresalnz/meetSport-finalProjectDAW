@@ -10,19 +10,24 @@ import MSCard from '../components/MSCard';
 import useListRequest  from '../hooks/useListRequest'
 
 
-const cards = Array(20)
-  .fill()
-  .map((_, i) => <Text key={i}>{`Card ${i}`}</Text>);
+
 
 export default function Home() {
 
   const size = useContext(ResponsiveContext);
-  const list = useListRequest()
+  const listPublication = useListRequest()
   
   return <>
-      <Grid columns={size !== 'small' ? 'medium' : '100%'} gap="small">
-        {cards.map((card, index) => (
-          <MSCard title={list} ></MSCard>
+      <Grid columns={size !== 'small' ? 'medium' : '100%'} gap="large">
+        {listPublication.map((card, index) => (
+          <MSCard 
+          title={card.title}
+          description={card.description} 
+          location={card.location} 
+          date={card.date} 
+          participants={card.participants} 
+          price={card.price}>
+          </MSCard>
         ))}
       </Grid>
       <Outlet />
