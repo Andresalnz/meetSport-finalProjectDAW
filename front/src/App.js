@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import CreateRequest from './pages/CreateRequest';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
+import Profile from './pages/Profile';
 
 const theme = {
   global: {
@@ -52,6 +53,7 @@ function App() {
             </Route>
             <Route path="sign-up" element = {<SignUp />}></Route>
             <Route path="login" element = {<SignIn />}></Route>
+            <Route path="profile" element = {<Profile />}></Route>
           </Route>
         </Routes>
       </Router>
