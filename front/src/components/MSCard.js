@@ -45,15 +45,7 @@ export default function MSCard({title, description, location, date, participants
         </Box>    
         {/* <hr width="90%"/> */}
       </CardHeader>
-      <Box hoverIndicator={{
-        background: {
-          color: 'background-contrast',
-        },
-        elevation: 'medium',
-        }}
-        onClick={() => {
-          alert('clicked');
-        }}>
+      <Box>
         <CardBody margin={{horizontal:'small', vertical:'small'}}>
           <Box margin={{vertical:'small'}} >
             <Heading level="3" margin='none' >
