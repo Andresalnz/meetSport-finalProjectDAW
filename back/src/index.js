@@ -8,6 +8,8 @@ const userRouter = require('./controllers/userController')
 const publicationsRouter = require('./controllers/publiactionsController')
 const cors = require('cors')
 const handleError = require ('./middleware/handleError')
+const sportRouter = require('./controllers/sportsController')
+const locationRouter = require('./controllers/locationController')
 
 database()
 
@@ -20,5 +22,7 @@ app.use(cors({
 
 app.use ('/user', userRouter)
 app.use('/publication', publicationsRouter)
+app.use('/sport',sportRouter)
+app.use('/location',locationRouter)
 app.use(handleError)
 
