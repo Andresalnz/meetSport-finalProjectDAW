@@ -3,6 +3,19 @@ const userModel = require('../models/UserModel')
 const router = require('express').Router()
 const bcrypt = require ('bcrypt')
 
+
+
+router.get('/', (request, response, next) => {
+  userModel.find({}).populate('publications')
+  .then(result => {
+    response.send(result)
+  })
+  .catch(err => {
+    next(err.name)
+  })
+})
+
+
 //Create user
 router.post('/signup', async (request, response, next) => {
   const {body} = request
@@ -18,8 +31,13 @@ router.post('/signup', async (request, response, next) => {
     image
   })
   //TODO: - Subida de imagen
-  newUser.save().then(result => { response.status(200).send(result) })
-  .catch(error => { next(error) })
+  newUser.save()
+  .then(result => { 
+    response.status(200).send(result) 
+  })
+  .catch(error => { 
+    next(error) 
+  })
 })
 
 //Login user

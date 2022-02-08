@@ -38,10 +38,10 @@ const userSchema = new Schema ({
     type: String,
     required: false
   },
-  publications: { 
+  publications: [{ 
     type: Schema.Types.ObjectId,
     ref: 'Publication'
-  }
+  }]
 })
 
 userSchema.set('toJSON',{
