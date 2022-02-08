@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 
 
 
-router.post('/new',  (request, response, next) => {
+router.post('/new', async  (request, response, next) => {
   console.log("nueva publicacion")
   const {body} = request
   console.log(body)
@@ -16,10 +16,10 @@ router.post('/new',  (request, response, next) => {
     date,
     participants,
     price,
-    userId
+    user
   } = body
     
-  const user = userModel.findById(userId)
+  const userId = await userModel.findById(user)
   console.log(user);
   const newPublication = new publicationModel({
     title,
@@ -29,15 +29,12 @@ router.post('/new',  (request, response, next) => {
     date,
     participants,
     price,
-    user: user._id
+    user
   })
-  console.log('nuevo',newPublication);
-  //El formateo de la fecha se hace en el front o en el back o en los dos?
+  
+  
   newPublication.save()
   .then(result => { 
-    
-    user.publications = user.publications.concat(result._id)
-    user.save()
     response.status(200).send(result)
    })
   .catch(error => { next(error) })
