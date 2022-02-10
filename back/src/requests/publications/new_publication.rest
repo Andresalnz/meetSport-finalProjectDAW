@@ -1,0 +1,14 @@
+POST http://localhost:3001/publication/new
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMDE4N2UwOTI5OWQzZWFhYmZiZWI2MyIsInVzZXJuYW1lIjoiYW5keSIsImlhdCI6MTY0NDUzMTU3NywiZXhwIjoxNjQ1MTM2Mzc3fQ.W3_2mf8amZ9cnpl-WOJ-Ldlgum3LfCUv2LUJepG5Mfw
+
+{
+	"title": "usetoken",
+	"description": "description 1",
+	"place": "CAI",
+	"location":"Alberti",
+	"date": "1-02-1990 23:10",
+	"participants": 2,
+	"price":2.5
+	
+}
