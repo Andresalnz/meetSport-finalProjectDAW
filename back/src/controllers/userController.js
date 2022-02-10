@@ -40,25 +40,11 @@ router.post('/signup', async (request, response, next) => {
   })
 })
 
-//Login user
-router.post('/signin',  async (request, response, next) => {
-  const {body} = request
-  const {username,password} = body
-  userModel.find({username:username}).then(result => {
-    if (bcrypt.compareSync(password,result[0].passwordHash)){
-      response.status(200).send(result)
-    } else {
-      response.status(401).send('Incorrect Password or username')
-    }
-  })
-  .catch(error => next(error))
-})
-
 //Update user
 router.put('/account', (request, response) => {
   const {body} = request
   const {id, username, mail, location, sports} = body
-  const options = { new: true, rawResult: true } //rawResult: Para verificar que mongoDB encontró y actualizó el documento
+  const options = { new: true, rawResult: false } //rawResult: Para verificar que mongoDB encontró y actualizó el documento
   const filter = { _id:id }
   const updateUser = {
     username,

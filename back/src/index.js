@@ -10,7 +10,7 @@ const cors = require('cors')
 const handleError = require ('./middleware/handleError')
 const sportRouter = require('./controllers/sportsController')
 const locationRouter = require('./controllers/locationController')
-
+const loginRouter = require('./controllers/loginController')
 database()
 
 app.use (express.json());
@@ -19,8 +19,8 @@ app.use(cors({
   origin: ['http://localhost:3000']
 }));
 
-
-app.use ('/user', userRouter)
+app.use('/',loginRouter)
+app.use('/user', userRouter)
 app.use('/publication', publicationsRouter)
 app.use('/sport',sportRouter)
 app.use('/location',locationRouter)

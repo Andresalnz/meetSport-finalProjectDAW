@@ -2,10 +2,11 @@ const publicationModel = require('../models/PublicationsModel')
 const userModel = require('../models/UserModel')
 const router = require('express').Router()
 const mongoose = require('mongoose')
+const userToken = require('../middleware/userToken')
 
 
 
-router.post('/new', async  (request, response, next) => {
+router.post('/new', userToken, async  (request, response, next) => {
   console.log("nueva publicacion")
   const {body} = request
   console.log(body)
@@ -16,11 +17,11 @@ router.post('/new', async  (request, response, next) => {
     date,
     participants,
     price,
-    user
-  } = body
-    
-  const userId = await userModel.findById(user)
-  console.log(user);
+    } = body
+
+  const {userId} = request
+  const user = await userModel.findById(userId)
+
   const newPublication = new publicationModel({
     title,
     description,
@@ -50,7 +51,7 @@ router.get('/', (request, response, next) => {
 })
 
 
-router.put('/history/update', (request, response,next) => {
+router.put('/history/update', userToken, (request, response,next) => {
   const {body} = request
   const { id,
           title,
@@ -80,7 +81,7 @@ router.put('/history/update', (request, response,next) => {
 })
 
 
-router.delete('history/delete', (request,response,next) => {
+router.delete('history/delete', userToken, (request,response,next) => {
   const {id} = request.body
   const filter = { _id:id }  
   const options = { new: true, rawResult: true } //rawResult: Para verificar que mongoDB encontró y borró el documento   
