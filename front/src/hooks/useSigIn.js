@@ -4,7 +4,7 @@ export default function useSignIn() {
   const navigate = useNavigate();
   const [signInErrorState, setSignInError] = useState({error: false, message: ''});
 
-  const url = 'http://localhost:3001/user/signin'
+  const url = 'http://localhost:3001/signin'
   const userSignIn =  (data) => {
     setSignInError({error:false, message:'OK'})
     fetch(url, {
@@ -31,5 +31,5 @@ export default function useSignIn() {
   }
 
 
-  return [userSignIn, signInErrorState]
+  return [userSignIn, signInErrorState, user]
 }
