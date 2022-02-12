@@ -31,5 +31,5 @@ export default function useSignIn() {
   }
 
 
-  return [userSignIn, signInErrorState, user]
+  return [userSignIn, signInErrorState]
 }
