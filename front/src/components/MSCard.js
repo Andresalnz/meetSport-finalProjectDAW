@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { Add } from "grommet-icons";
+import { Add, Alert } from "grommet-icons";
 import {
   Text,
-  Anchor,
+  Select,
   Box,
   Button,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
-  Collapsible,
+  Layer,
   Heading,
   Image,
   Paragraph,
@@ -18,22 +18,18 @@ import useListRequest  from '../hooks/useListRequest'
 
 import { FormDown, FormUp, ShareOption } from 'grommet-icons';
 import sendRequest from  '../hooks/useCreateRequest';
+import ConfirmationModal from './ConfirmationModal';
 
 export default function MSCard(props) {
   const list = useListRequest()
-  const [open, setOpen] = useState(false);
+  //const [open, setOpen] = useState(false);
 
-  const ExpandButton = (props) => {
-    
-    const Icon = open ? FormUp : FormDown;
-    return (
-      <Button
-        hoverIndicator="light-4"
-        icon={<Icon color="brand" />}
-        {...props}
-      />
-    );
-  };
+ 
+    const [open, setOpen] = useState(false);
+    const onClose = () => setOpen(false);
+
+   
+  
   
   return <>
     <Card pad='small' gap='small' background={{color:'white'}}  round>
@@ -64,9 +60,17 @@ export default function MSCard(props) {
           <Text margin='none' weight='bold' >a las {props.date}</Text>
           <Text margin='none' weight='bold'>Busco a { props.participants} personas</Text>
           <Text margin='none' weight='bold' >Precio: {props.price}</Text>
-          <Button primary icon={<Add />} label="Add" onClick={() => {}} />
+          <Button primary icon={<Add />} label="Add" onClick={() => setOpen(true)} />
+          { /* Modal de confirmacion */ }
+          {
+            open && <ConfirmationModal
+              open = {open}
+              close = {onClose}
+                    />
+          }
         </CardFooter>
       </Box>
     </Card>
+    
   </>
 }
