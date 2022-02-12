@@ -11,7 +11,7 @@ export default function Login(props) {
         <Box fill align="center" justify="center" width="medium">
            
             {
-                signInErrorState.error && <Notification toast status='critical'  title="Email o password incorrecto"/> 
+                signInErrorState.message !== 'OK' && <Notification toast status='critical'  title="Email o password incorrecto"/> 
             }
             <Box width="medium">
                 <Heading>
@@ -37,11 +37,6 @@ export default function Login(props) {
                         />
                     </Box>
                 </Form>
-            </Box>
-            <hr width="35%"/>
-            <Box direction="row" align="center">
-                <Button icon={<Google/>} size="large"></Button>
-                <Link to="/">Inicia sesión con Google</Link>
             </Box>
         </Box>
     )
