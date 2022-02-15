@@ -1,48 +1,57 @@
-import {Box, Avatar, Text, Button, Tabs, Tab, Card, CardBody, CardHeader, CardFooter, } from 'grommet'
+import {Box,ResponsiveContext, Grid, Avatar, Text, Button, Tabs, Tab, Card, CardBody, CardHeader, CardFooter, } from 'grommet'
 import {User} from 'grommet-icons'
-import {useState} from 'react'
+import {useState, useContext} from 'react'
+import MSCard from '../components/MSCard'
+import useListRequest  from '../hooks/useListRequest'
 
-export default function Profile () {
+export default function Profile (props) {
 
   //functions for change tabs
   const [index, setIndex] = useState(0)
   const onActive = (nextIndex) => setIndex(nextIndex)
 
+  const [remove, setRemove] = useState('false');
+  const removeTarjet = () => {
+     setRemove(false)
+  }
+  const size = useContext(ResponsiveContext);
+  const listPublication = useListRequest()
+
   return (
-    <Box>
-      {/*Info user */}
-      <Box>
-        <Box>
-          <Avatar 
-            size='2xl'
-            background='dark-4'
-          >
-            <User size='large'/>
-          </Avatar>
-          <Box direction='row'>
-            <Box direction='column'>
-              <Text>@Andy</Text>
-              <Text>Soy de Càdiz</Text>
-              <Text>Me gustan estos deportes: Baloncesto y balonmano</Text>    
-            </Box>  
-            <Box>
-              <Button primary>Editar Perfil</Button>
-            </Box> 
-          </Box>
-        </Box>
-      </Box>
-      {/*publication list and tab */}
-      <Box>
-        <Tabs activeIndex={index} onActive={onActive}>
-          <Tab title='Mis publicaciones'>
-           
+      <Box pad="small" gap="small">
+        <Tabs   onActive={()=>removeTarjet} >
+          <Tab title='Mis datos'>
+            <Box direction='column' name margin={{horizontal:"25%"}} gap="small" pad="medium" width="50%" >
+              <Box align='start' width="20px">
+                <Text >@Andy</Text>
+              </Box>
+              <Box>
+                <Text>Soy de Càdiz</Text>
+              </Box>
+              <Box>
+                <Text>Me gustan estos deportes: Baloncesto y balonmano</Text>  
+              </Box>  
+            </Box>
           </Tab>
-          <Tab title='Publicaciones que disfruté'>
-            
+          <Tab title='Mis publicaciones' >
+            <Grid columns={size !== 'small' ? 'medium' : '100%'} gap="large">
+              {listPublication.map((card, index) => (
+                <MSCard
+                title={card.title}
+                description={card.description} 
+                location={card.location} 
+                date={card.date} 
+                participants={card.participants} 
+                price={card.price}
+                remove = {remove}
+                >
+                </MSCard>
+              ))}
+            </Grid>
           </Tab>
-        </Tabs>
-        
+          <Tab title='Publicaciones que disfruté'>      
+          </Tab>
+        </Tabs>    
       </Box>
-    </Box>
   )
 } 
