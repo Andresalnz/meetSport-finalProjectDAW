@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Add, Alert } from "grommet-icons";
+import { Add, Trash } from "grommet-icons";
 import {
   Text,
   Select,
@@ -22,15 +22,20 @@ import ConfirmationModal from './ConfirmationModal';
 
 export default function MSCard(props) {
   const list = useListRequest()
-  //const [open, setOpen] = useState(false);
 
+  const date = new Date(props.date)
  
+  const formatter = new Intl.NumberFormat('es-ES', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 2
+  })
+ 
+
+    {/*Confirmation modal */}
     const [open, setOpen] = useState(false);
     const onClose = () => setOpen(false);
-
-   
-  
-  
+    
   return <>
     <Card pad='small' gap='small' background={{color:'white'}}  round>
       <CardHeader direction='column' align='start' margin={{top:'small' }}>
@@ -57,10 +62,17 @@ export default function MSCard(props) {
         </CardBody>  
         <CardFooter direction='column' margin={{horizontal:'small', bottom:'small'}} align='start'>
           <Text margin='none' weight='bold'>En {props.location} </Text>
-          <Text margin='none' weight='bold' >a las {props.date}</Text>
+          <Text margin='none' weight='bold' >a las {date.getHours() + ':' + date.getMinutes() + ' del ' + date.getDate() + '/' + date.getMonth()+1 }</Text>
           <Text margin='none' weight='bold'>Busco a { props.participants} personas</Text>
-          <Text margin='none' weight='bold' >Precio: {props.price}</Text>
-          <Button primary icon={<Add />} label="Add" onClick={() => setOpen(true)} />
+          <Text margin='none' weight='bold' >Precio: {formatter.format (props.price)}</Text>
+          {
+            
+           props.remove ? 
+            <Button primary icon={<Trash />} label="Delete" onClick={() => setOpen(true)} />
+            : 
+            <Button primary icon={<Add />} label="Add" onClick={() => setOpen(true)} />
+          }
+          
           { /* Modal de confirmacion */ }
           {
             open && <ConfirmationModal
