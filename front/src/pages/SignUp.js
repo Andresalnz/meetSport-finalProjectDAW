@@ -47,7 +47,7 @@ export default function SignUp(props) {
                             <Box direction='row' gap='small'>
                                 <FormField name="subscribe">
                                     <Text id="chooseSport">Elige deportes (máximo 3)</Text>
-                                    <Box direction='row' margin={{top:"10px"}}>
+                                    <Box direction='row' margin={{vertical:"10px"}}>
                                         <CheckBoxGroup name="sport" margin={{right:'10px'}}  options={["Baloncesto","Fútbol","Runner"]} direction='column'/> 
                                         <CheckBoxGroup name="sport" margin={{right:'10px'}}  options={["Baloncesto","Fútbol","Runner"]} direction='column'/>
                                         <CheckBoxGroup name="sport" margin={{right:'10px'}}  options={["Baloncesto","Fútbol","Runner"]} direction='column'/>
@@ -55,14 +55,6 @@ export default function SignUp(props) {
                                 </FormField>
                             </Box>
                         </Box>
-                   {/*Upload Image */}       
-                            <Box direction="row" align='center' margin={{top:"20px", bottom:"20px"}}>
-                                <Text size="medium" >Add Image</Text>
-                                <Box pad={{left:'large'}} >
-                                    <Button primary label="Add" size='medium'/>
-                                </Box>
-                            </Box>
-                       
                     {/*Options  */}
                         <Box gap='small' direction='row' justify='end' alignSelf='end' >
                             <Button secondary label="Cancelar" color="dark-3"/>
