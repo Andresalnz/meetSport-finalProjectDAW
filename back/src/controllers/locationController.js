@@ -2,7 +2,7 @@ const locationModel = require('../models/LocationModel')
 const router = require('express').Router()
 
 //list location in Create Account
-router.get('/signup',(request,response,next) => {
+router.get('/',(request,response,next) => {
   locationModel.find({})
   .then(result => {
     response.status(200).send(result)
