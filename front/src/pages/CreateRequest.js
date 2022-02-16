@@ -20,7 +20,7 @@ export default function CreateRequest() {
   const sendRequest = useCreateRequest();
   const [timeValue, setTimeValue] = useState('');
   const [dateValue, setDateValue] = useState('');
-
+  const daysInMonth = month => new Date(2019, month, 0).getDate();
   return (
     
     <Layer
@@ -45,14 +45,34 @@ export default function CreateRequest() {
             <TextInput id="requestLocation" name="requestLocation" placeholder="Campo hondo" />
           </FormField>
           <RadioButtonGroup direction='row' name="cities" options={["Cádiz","Sevilla","Malaga","Almeria","Córdoba","Huelva","Jaén","Granada"]}></RadioButtonGroup>        
-            <Box gap="small" width="large" direction="row" margin={{vertical:'small'}}>
-              <FormField label="Date & time" name="requestDate" htmlFor="requestDate" required>
-                <DateInput 
-                  name="requestDate" 
-                  id="requestDate" 
-                  format="dd/mm/yyyy" 
+            <Box gap="small" width="medium" direction="row" margin={{vertical:'small'}}>
+            <FormField justify="end" name="requestDate" htmlFor="requestDate" required> 
+                <MaskedInput
+                  name="requestDate"
+                  id="requestDate"
+                  mask={[
+                    {
+                      length: [1, 2],
+                      options: Array.from({ length: 12 }, (v, k) => k + 1),
+                      regexp: /^1[0,1-2]$|^0?[1-9]$|^0$/,
+                      placeholder: 'dd',
+                    },
+                    { fixed: '/' },
+                    {
+                      length: [1, 2],
+                      options: Array.from(
+                        {
+                          length: daysInMonth(parseInt(dateValue.split('/')[0], 10)),
+                        },                  (v, k) => k + 1,
+                    ),
+                      regexp: /^[1-2][0-9]$|^3[0-1]$|^0?[1-9]$|^0$/,
+                      placeholder: 'mm',
+                    },
+                    
+                  ]}
                   value={dateValue}
-                  onChange={event => setDateValue(event.value)}/>
+                  onChange={event => setDateValue(event.target.value)}
+                />
               </FormField>
               <FormField justify="end" name="requestHour" htmlFor="requestHour" required>
                 <MaskedInput
