@@ -3,6 +3,8 @@ import { Yoga } from 'grommet-icons';
 import styled from 'styled-components';
 import { Link, NavLink } from "react-router-dom";
 import useSignIn from '../hooks/useSigIn';
+import { useState } from 'react';
+import { useAuth } from '../hooks/useAuth';
 
 const MSHeaderAnchor = styled(Anchor)`
   display: flex;
@@ -29,7 +31,9 @@ const padHeader = {
 
 export default function MSHeader() {
 
-  const signIn = useSignIn()
+  const [signIn,signInErrorState] = useSignIn()
+  const {token, setToken} = useAuth()
+  const [remove, setRemove] = useState(false);
 
   return (
   <Header 
@@ -61,13 +65,15 @@ export default function MSHeader() {
           />
         </Link>
         {
-          signIn.error ? items.map(item => (
-            <NavLink exact to={item.href} style={(isActive) => ({color: isActive ? "green" : "black", textDecoration: "none"}) }>{item.label}</NavLink>
-          )) :
-          userItems.map(item => (
-            <NavLink exact to={item.href} style={(isActive) => ({color: isActive ? "black" : "green", textDecoration: "none"}) }>{item.label}</NavLink>
-          ))
-          
+          token ? 
+            userItems.map(item => (
+              <NavLink exact to={item.href} style={(isActive) => ({color: isActive ? "green" : "black", textDecoration: "none"}) }>{item.label}</NavLink>
+            )) 
+            :
+            items.map(item => (
+              <NavLink exact to={item.href} style={(isActive) => ({color: isActive ? "green" : "black", textDecoration: "none"}) }>{item.label}</NavLink>
+            )) 
+ 
         }
         
       </Nav>

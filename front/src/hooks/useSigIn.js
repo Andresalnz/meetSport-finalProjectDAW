@@ -1,8 +1,13 @@
 import {useNavigate} from 'react-router-dom'
 import {useState} from 'react'
+import { useAuth } from './useAuth';
+
+
 export default function useSignIn() {
   const navigate = useNavigate();
   const [signInErrorState, setSignInError] = useState({error:false, message:'OK'});
+  const {token, setToken} = useAuth()
+  
 
   const url = 'http://localhost:3001/signin'
   const userSignIn =  (data) => {
@@ -16,14 +21,20 @@ export default function useSignIn() {
       },
       body: JSON.stringify(data) // body data type must match "Content-Type" header
     })
-    .then((result) =>{
+    .then((result) => {
+     
       if (result.ok) {
-        setSignInError({error:false, message:'OK'})
-        navigate('/')
+       return result.json()
       } else {
-        setSignInError({error:true, message:'Error login'})
+        throw new Error('NOO LOGIN')
       }
+    })
       
+    .then((result) =>{
+      sessionStorage.setItem('token', result.token)
+      setToken(result.token)
+      setSignInError({error:false, message:'OK'})
+      navigate('/')
     })
     .catch(error => {
       setSignInError({error:true, message:'Error login'})
@@ -31,5 +42,5 @@ export default function useSignIn() {
   }
 
 
-  return [userSignIn, signInErrorState,'HOOLA']
+  return [userSignIn, signInErrorState ]
 }

@@ -7,6 +7,7 @@ import CreateRequest from './pages/CreateRequest';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import Profile from './pages/Profile';
+import { AuthProvider, RequireAuth } from './hooks/useAuth';
 
 const theme = {
   global: {
@@ -40,25 +41,27 @@ const theme = {
 
 function App() {
   return (
-    <Grommet theme={theme}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="home" element={<Home />} > 
-              <Route path="create-request" element={<CreateRequest />} />
+    <AuthProvider>
+      <Grommet theme={theme}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="home" element={<Home />} > 
+                <Route path="create-request" element={<RequireAuth> <CreateRequest /></RequireAuth>} />
+              </Route>
+              
+              <Route path="create-request" element={<Home />} >
+                <Route index element={<RequireAuth> <CreateRequest /></RequireAuth>} />
+              </Route>
+              <Route path="sign-up" element = {<SignUp />}></Route>
+              <Route path="login" element = {<SignIn />}></Route>
+              <Route path="profile" element = {<Profile />}></Route>
             </Route>
-            <Route path="create-request" element={<Home />} >
-              <Route index element={<CreateRequest />} />
-            </Route>
-            <Route path="sign-up" element = {<SignUp />}></Route>
-            <Route path="login" element = {<SignIn />}></Route>
-            <Route path="profile" element = {<Profile />}></Route>
-          </Route>
-        </Routes>
-      </Router>
-      
-    </Grommet>
+          </Routes>
+        </Router>
+      </Grommet>
+    </AuthProvider>
   );
 }
 

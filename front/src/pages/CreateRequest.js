@@ -35,20 +35,20 @@ export default function CreateRequest() {
           <Heading level={3} margin={{ top: '0', bottom: '30px'}}>
             Create a request
           </Heading>
-          <FormField label="Title" name="requestTitle" htmlFor="requestTitle" required>
-            <TextInput id="requestTitle" name="requestTitle" placeholder="Basket session with friends..."  />
+          <FormField label="Title" name="title" htmlFor="requestTitle" required>
+            <TextInput id="requestTitle" name="title" placeholder="Basket session with friends..."  />
           </FormField>
-          <FormField label="Description of activity" name="requestDescription" htmlFor="select" required>
-            <TextArea id="requestDescription" name="requestDescription" placeholder="Nos hacen falta 3 tios más para un parti..." />
+          <FormField label="Description of activity" name="description" htmlFor="select" required>
+            <TextArea id="requestDescription" name="description" placeholder="Nos hacen falta 3 tios más para un parti..." />
           </FormField>
-          <FormField label="Location" name="requestLocation" htmlFor="select" required>
-            <TextInput id="requestLocation" name="requestLocation" placeholder="Campo hondo" />
+          <FormField label="Location" name="location" htmlFor="select" required>
+            <TextInput id="requestLocation" name="location" placeholder="Campo hondo" />
           </FormField>
-          <RadioButtonGroup direction='row' name="cities" options={["Cádiz","Sevilla","Malaga","Almeria","Córdoba","Huelva","Jaén","Granada"]}></RadioButtonGroup>        
+          <RadioButtonGroup direction='row' name="place" options={["Cádiz","Sevilla","Malaga","Almeria","Córdoba","Huelva","Jaén","Granada"]}></RadioButtonGroup>        
             <Box gap="small" width="medium" direction="row" margin={{vertical:'small'}}>
-            <FormField justify="end" name="requestDate" htmlFor="requestDate" required> 
+            <FormField justify="end" name="date" htmlFor="requestDate" required> 
                 <MaskedInput
-                  name="requestDate"
+                  name="date"
                   id="requestDate"
                   mask={[
                     {
@@ -74,9 +74,9 @@ export default function CreateRequest() {
                   onChange={event => setDateValue(event.target.value)}
                 />
               </FormField>
-              <FormField justify="end" name="requestHour" htmlFor="requestHour" required>
+              <FormField justify="end" name="hour" htmlFor="requestHour" required>
                 <MaskedInput
-                  name="requestHour"
+                  name="hour"
                   id="requestHour"
                   mask={[
                     {
@@ -119,10 +119,10 @@ export default function CreateRequest() {
                 />
               </FormField>
             </Box>
-          <FormField label="Participants" name="requestParticipants" htmlFor="requestParticipants" width="fit-content">
+          <FormField label="Participants" name="participants" htmlFor="requestParticipants" width="fit-content">
             <MaskedInput
               id="requestParticipants"
-              name="requestParticipants"
+              name="participants"
               placeholder="11"
               length="2"
               type="number"
