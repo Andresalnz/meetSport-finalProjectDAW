@@ -1,6 +1,4 @@
 import {Box, Form, FormField, Heading, TextInput, Button, Notification } from "grommet";
-import { Google } from "grommet-icons";
-import { Link } from "react-router-dom"
 import useSignIn from '../hooks/useSigIn'
 
 export default function Login(props) {
