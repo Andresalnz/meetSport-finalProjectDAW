@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useAuth } from './useAuth';
 
 export default function useCreateRequest() {
   const [request, sendRequest] = useState(null);
   const navigate = useNavigate();
+  const {token} = useAuth()
 
   useEffect(() => {
     async function postPublication(url = '', data = {}) {
@@ -13,14 +15,15 @@ export default function useCreateRequest() {
         mode: 'cors', // no-cors, *cors, same-origin
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'  
+          'Access-Control-Allow-Origin': '*',
+          'Authorization':`Bearer ${token}`
         },
         body: JSON.stringify(data) // body data type must match "Content-Type" header
       });
     }
     console.log('request: ', request);
     if (request) {
-      postPublication('http://localhost:3001/publications', request);
+      postPublication('http://localhost:3001/publication/new', request);
       navigate('/');
     }
     
