@@ -17,9 +17,9 @@ const items = [
 ];
 
 const userItems = [
-  { label: <Text size="medium" >Home</Text>, href: '#' },
-  { label: <Text size="medium" >History</Text>, href: '#' },
-  { label: <Text size="medium" >Profile</Text>, href: '#' },
+  { label: <Text size="medium" >Home</Text>, href: '/home' },
+  { label: <Text size="medium" >Profile</Text>, href: '/profile' },
+  { label: <Text size="medium" >Log Out</Text>, href: '/login' },
 ];
 
 const padHeader = {
@@ -34,6 +34,8 @@ export default function MSHeader() {
   const [signIn,signInErrorState] = useSignIn()
   const {token, setToken} = useAuth()
   const [remove, setRemove] = useState(false);
+
+  const {user} = useAuth()
 
   return (
   <Header 
@@ -65,7 +67,7 @@ export default function MSHeader() {
           />
         </Link>
         {
-          token ? 
+          user.token ? 
             userItems.map(item => (
               <NavLink exact to={item.href} style={(isActive) => ({color: isActive ? "green" : "black", textDecoration: "none"}) }>{item.label}</NavLink>
             )) 
