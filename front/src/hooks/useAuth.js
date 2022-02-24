@@ -4,12 +4,13 @@ import { Navigate, useLocation } from "react-router-dom";
 export const AuthContext = createContext(null)
 
 export const AuthProvider = ({children}) => {
-  const valueToken = sessionStorage.getItem('token')
-  const [token, setToken] = useState(valueToken);
+  const valueToken = sessionStorage.getItem('token') // 
+  const valueUserId = sessionStorage.getItem('userId')
+  const [user, setUser] = useState({token: valueToken, userId: valueUserId});
   
   
   return (
-    <AuthContext.Provider value={{token, setToken}}>
+    <AuthContext.Provider value={{user, setUser}}>
       {
         children
       }
@@ -19,8 +20,8 @@ export const AuthProvider = ({children}) => {
 
 export const RequireAuth = ({children}) => {
   const location = useLocation()
-  const {token} = useContext(AuthContext)
-  if(!token) {
+  const {user} = useContext(AuthContext)
+  if(!user.token) {
    return <Navigate to="/login" state={{ from: location }} replace />;
   }
   return children
