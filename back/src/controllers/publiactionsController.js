@@ -15,36 +15,50 @@ router.post('/new', userToken, async  (request, response, next) => {
     place,
     location,
     date,
+    hour,
     participants,
     price,
+    userId
     } = body
 
-  const {userId} = request
+  
   const user = await userModel.findById(userId)
-
+    console.log("Soy usuario back ", user)
   const newPublication = new publicationModel({
     title,
     description,
     place,  
     location,
-    date,
+    date: date + ' ' + hour,
     participants,
     price,
-    user
+    user: user._id
   })
   
-  
-  newPublication.save()
-  .then(result => { 
-    response.status(200).send(result)
-   })
-  .catch(error => { next(error) })
-})
+try {
+  const savedPublication = await newPublication.save()
+  user.publications = user.publications.concat(savedPublication)
+  await user.save()
+  response.status(200).send(savedPublication)
+} catch (error) {
+  next(error)
+}
+
+//   newPublication.save()
+//   .then(result => { 
+//     console.log('esta es la nueva publicacion',result)
+//     user.publications = user.publications.push(result._id)
+   
+//     response.status(200).send(result)
+//    })
+//    await user.save()
+//   .catch(error => { next(error) })
+ })
 
 
 
 router.get('/', (request, response, next) => {
-  publicationModel.find({}).then(result => {
+  publicationModel.find({}).populate('user').then(result => {
     response.status(200).send(result)
   })
   .catch(error => { next(error) }) 
@@ -81,7 +95,7 @@ router.put('/history/update', userToken, (request, response,next) => {
 })
 
 
-router.delete('history/delete', userToken, (request,response,next) => {
+router.delete('/delete', (request,response,next) => {
   const {id} = request.body
   const filter = { _id:id }  
   const options = { new: true, rawResult: true } //rawResult: Para verificar que mongoDB encontró y borró el documento   
