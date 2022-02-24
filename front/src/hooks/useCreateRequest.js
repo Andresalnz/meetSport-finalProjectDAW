@@ -5,18 +5,19 @@ import { useAuth } from './useAuth';
 export default function useCreateRequest() {
   const [request, sendRequest] = useState(null);
   const navigate = useNavigate();
-  const {token} = useAuth()
-
+  const {user} = useAuth()
+console.log('hola ',user)
   useEffect(() => {
     async function postPublication(url = '', data = {}) {
       // Opciones por defecto estan marcadas con un *
+      data.userId = user.userId
       await fetch(url, {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
-          'Authorization':`Bearer ${token}`
+          'Authorization':`Bearer ${user.token}`
         },
         body: JSON.stringify(data) // body data type must match "Content-Type" header
       });
@@ -24,7 +25,6 @@ export default function useCreateRequest() {
     console.log('request: ', request);
     if (request) {
       postPublication('http://localhost:3001/publication/new', request);
-      navigate('/');
     }
     
   }, [request]);
