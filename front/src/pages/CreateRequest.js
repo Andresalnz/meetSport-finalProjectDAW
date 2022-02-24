@@ -14,9 +14,10 @@ import {
 } from 'grommet';
 import useCreateRequest from '../hooks/useCreateRequest';
 import { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 export default function CreateRequest() {
+  
   const sendRequest = useCreateRequest();
   const [timeValue, setTimeValue] = useState('');
   const [dateValue, setDateValue] = useState('');
@@ -119,17 +120,28 @@ export default function CreateRequest() {
                 />
               </FormField>
             </Box>
-          <FormField label="Participants" name="participants" htmlFor="requestParticipants" width="fit-content">
-            <MaskedInput
-              id="requestParticipants"
-              name="participants"
-              placeholder="11"
-              length="2"
-              type="number"
-              required
-            />
-          </FormField>
-        
+            <Box gap="small" width="medium" direction="row" margin={{vertical:'small'}}>
+              <FormField label="Participants" name="participants" htmlFor="requestParticipants" width="fit-content">
+                <MaskedInput
+                  id="requestParticipants"
+                  name="participants"
+                  placeholder="11"
+                  length="2"
+                  type="number"
+                  required
+                />
+              </FormField>
+              <FormField label="Price" name="price" htmlFor="requestPrice" width="fit-content">
+                <MaskedInput
+                  id="requestPrice"
+                  name="price"
+                  placeholder="1.50"
+                  length="3"
+                  type="string"
+                  required
+                />
+              </FormField>
+            </Box>
         <Box
           as="footer"
           gap="small"
