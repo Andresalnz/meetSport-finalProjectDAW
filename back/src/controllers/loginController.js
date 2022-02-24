@@ -24,6 +24,7 @@ router.post('/signin',  async (request, response) => {
 
   response.send({
     username:user.username,
+    id: user.id,
     token
   })
 })
