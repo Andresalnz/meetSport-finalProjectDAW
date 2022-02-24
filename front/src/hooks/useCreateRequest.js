@@ -6,7 +6,7 @@ export default function useCreateRequest() {
   const [request, sendRequest] = useState(null);
   const navigate = useNavigate();
   const {user} = useAuth()
-console.log('hola ',user)
+
   useEffect(() => {
     async function postPublication(url = '', data = {}) {
       // Opciones por defecto estan marcadas con un *
@@ -25,6 +25,7 @@ console.log('hola ',user)
     console.log('request: ', request);
     if (request) {
       postPublication('http://localhost:3001/publication/new', request);
+      document.location.href = 'http://localhost:3000/home';
     }
     
   }, [request]);
