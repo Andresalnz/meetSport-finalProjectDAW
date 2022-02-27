@@ -1,7 +1,22 @@
 import { Box, Button, Grommet, Heading, Layer, Select, Text } from 'grommet';
 import {useState} from 'react-dom'
+import {useAuth} from '../hooks/useAuth'
+import useRemoveRequest from '../hooks/useRemoveRequest';
 
 export default function ConfirmationModal(props) {
+
+  const {user}  = useAuth() 
+  //const sendRequest = useRemoveRequest();
+  
+  const actionOk = (id) => {
+    console.log('funicona picha')
+    if (id){
+      props.action(id)
+    }
+   
+    props.close()
+
+  }
   return (
        <Grommet>
             {props.open && (
@@ -18,7 +33,7 @@ export default function ConfirmationModal(props) {
                     justify="end"
                     pad={{ top: 'medium', bottom: 'small' }}
                 >
-                    <Button label="Sep" onClick={props.close} />
+                    <Button label="Sep" onClick={() => actionOk( props.id)} />
                     <Button label="Nop" onClick={props.close} color="dark-3" />
                   </Box>
                 </Box>

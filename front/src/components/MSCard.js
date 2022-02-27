@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { Add, Trash } from "grommet-icons";
 import {
   Text,
-  Select,
+  
   Box,
   Button,
   Card,
   CardBody,
   CardFooter,
   CardHeader,
-  Layer,
+  Tag ,
   Heading,
   Image,
   Paragraph,
@@ -32,6 +32,9 @@ export default function MSCard(props) {
   })
  
 
+
+
+
     {/*Confirmation modal */}
     const [open, setOpen] = useState(false);
     const onClose = () => setOpen(false);
@@ -39,10 +42,18 @@ export default function MSCard(props) {
   return <>
     <Card pad='small' gap='small' background={{color:'white'}}  round>
       <CardHeader direction='column' align='start' margin={{top:'small' }}>
-        <Box direction='column' height='xsmall' width='xsmall'  >
-          <Image fit='cover'  src="//v2.grommet.io/assets/Wilderpeople_Ricky.jpg" ></Image>
-          <Paragraph  margin={{top:'small', left:'small', bottom:'none', right:'none'}} size='large'>@Andy</Paragraph>
-        </Box>    
+        {/* <Box direction='row' height='xsmall' width='xsmall'  > */}
+          <Heading  margin={{top:'small', left:'small', bottom:'none', right:'none'}} level="2">
+     
+
+            {
+
+           'Soy '+  props.user
+
+            }
+
+          </Heading>
+        {/* </Box>     */}
         {/* <hr width="90%"/> */}
       </CardHeader>
       <Box>
@@ -56,9 +67,11 @@ export default function MSCard(props) {
           </Box>
           <Paragraph size='medium' textAlign='justify' margin='none'>
             {
-              props.description
+              props.description 
+             
             }
           </Paragraph>
+          <Button  label={props.sport} />
         </CardBody>  
         <CardFooter direction='column' margin={{horizontal:'small', bottom:'small'}} align='start'>
           <Text margin='none' weight='bold'>En {props.location} </Text>
@@ -78,6 +91,8 @@ export default function MSCard(props) {
             open && <ConfirmationModal
               open = {open}
               close = {onClose}
+              id = {props.id}
+              action = {props.action}
                     />
           }
         </CardFooter>
