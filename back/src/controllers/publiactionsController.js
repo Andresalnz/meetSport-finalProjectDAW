@@ -3,12 +3,15 @@ const userModel = require('../models/UserModel')
 const router = require('express').Router()
 const mongoose = require('mongoose')
 const userToken = require('../middleware/userToken')
+const sportModel = require('../models/SportsModel')
 
 
 
 router.post('/new', userToken, async  (request, response, next) => {
   console.log("nueva publicacion")
+
   const {body} = request
+  //sportModel.findOne({sportId:body.sporId})
   console.log(body)
   const {title,
     description,
@@ -18,12 +21,15 @@ router.post('/new', userToken, async  (request, response, next) => {
     hour,
     participants,
     price,
-    userId
+    userId,
+    sportId
     } = body
 
-  
+  const filter = {name:sportId}
   const user = await userModel.findById(userId)
-    console.log("Soy usuario back ", user)
+  const sport = await sportModel.findOne(filter)
+  
+    console.log("Soy usuario back ", sport)
   const newPublication = new publicationModel({
     title,
     description,
@@ -32,12 +38,15 @@ router.post('/new', userToken, async  (request, response, next) => {
     date: date + ' ' + hour,
     participants,
     price,
-    user: user._id
+    user: user._id,
+    sport: sport._id
   })
   
 try {
   const savedPublication = await newPublication.save()
+  sport.publications = sport.publications.concat(savedPublication)
   user.publications = user.publications.concat(savedPublication)
+  await sport.save()
   await user.save()
   response.status(200).send(savedPublication)
 } catch (error) {
@@ -58,14 +67,14 @@ try {
 
 
 router.get('/', (request, response, next) => {
-  publicationModel.find({}).populate('user').then(result => {
+  publicationModel.find({}).populate('user').populate('sport').then(result => {
     response.status(200).send(result)
   })
   .catch(error => { next(error) }) 
 })
 
 
-router.put('/history/update', userToken, (request, response,next) => {
+router.put('/update', userToken, (request, response,next) => {
   const {body} = request
   const { id,
           title,
@@ -96,11 +105,13 @@ router.put('/history/update', userToken, (request, response,next) => {
 
 
 router.delete('/delete', (request,response,next) => {
+  console.log('first')
   const {id} = request.body
+  console.log('id publi,', id)
   const filter = { _id:id }  
   const options = { new: true, rawResult: true } //rawResult: Para verificar que mongoDB encontró y borró el documento   
   publicationModel.findByIdAndDelete(filter,options)
-  .then(result => { response.status(202).send(result) })
+  .then(result => { response.status(200).send(result) })
   .catch(error => { next(error)})
 })
 
