@@ -19,13 +19,13 @@ import {
 import { deepMerge } from 'grommet/utils';
 import { grommet } from 'grommet/themes';
 import useListSports  from '../hooks/useListSports'
-import useCreateUser from '../hooks/useCreateUser';
-
+import useListLocations from '../hooks/useListLocations';
+import useCreateUser from '../hooks/useCreateUser'
 
 export default function SignUp(props) {
-    const listSports = useListSports()
+    const listLocations = useListLocations()
 
-    const sports=listSports.map((i)=>{ return i.name  })
+    const locations=listLocations.map((i)=>{ return i.name  })
 
     const sendRequest = useCreateUser();
 
@@ -50,18 +50,16 @@ export default function SignUp(props) {
                         <FormField name='password' label='Contraseña' margin={{top:"20px"}}>
                             <TextInput name='password' id="password" placeholder='Contraseña' required></TextInput>
                         </FormField>
-                        <FormField name='location' label='Ciudad' margin={{top:"20px"}}>
+                        {/* <FormField name='location' label='Ciudad' margin={{top:"20px"}}>
                             <TextInput name='location' id="username" placeholder='Ciudad' required></TextInput>
-                        </FormField>
+                        </FormField> */}
                 {/*Sports */}
                         <Box align='start'  margin={{top:'20px'}}>
                             <Box direction='row' gap='small'>
                                 <FormField name="subscribe">
-                                    <Text id="chooseSport">Elige deportes (máximo 3)</Text>
+                                    <Text id="chooseSport">Coloca donde vives</Text>
                                     <Box direction='row' margin={{vertical:"10px"}}>
-                                        <CheckBoxGroup name="sportName" margin={{right:'10px'}}  options={sports} direction='column'/> 
-                                        {/* <CheckBoxGroup name="sport" margin={{right:'10px'}}  options={["Baloncesto","Fútbol","Runner"]} direction='column'/>
-                                        <CheckBoxGroup name="sport" margin={{right:'10px'}}  options={["Baloncesto","Fútbol","Runner"]} direction='column'/> */}
+                                        <RadioButtonGroup name="locationId" margin={{right:'10px'}}  options={locations} direction='column'/> 
                                     </Box>
                                 </FormField>
                             </Box>

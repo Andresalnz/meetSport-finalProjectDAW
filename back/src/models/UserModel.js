@@ -24,9 +24,10 @@ const userSchema = new Schema ({
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
   },
   location: {
-    type: String,
-    required: "Location is required"
+    type: Schema.Types.ObjectId,
+    ref: 'Location'
   },
+
   sports: [{
     type:[String],
     ref: 'Sport'
@@ -39,7 +40,9 @@ const userSchema = new Schema ({
   publications: [{ 
     type: Schema.Types.ObjectId,
     ref: 'Publication'
-  }]
+  }],
+
+  
 })
 
 userSchema.set('toJSON',{

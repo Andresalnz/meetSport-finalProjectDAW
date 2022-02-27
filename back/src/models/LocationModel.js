@@ -6,6 +6,11 @@ const locationSchema = new Schema ({
     trim: true
   },
 
+  user: [{ 
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
+
   //usuarios:{},
   //publicaciones:{}
 })

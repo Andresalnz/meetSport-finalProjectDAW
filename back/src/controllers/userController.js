@@ -2,6 +2,7 @@ const { application } = require('express')
 const userModel = require('../models/UserModel')
 const router = require('express').Router()
 const bcrypt = require ('bcrypt')
+const locationModel = require('../models/LocationModel')
 
 
 
@@ -17,7 +18,7 @@ router.get('/', (request, response, next) => {
 
 router.get('/:id', (request, response, next) => {
   const {id} = request.params
-  userModel.findById({_id:id})
+  userModel.findById({_id:id}).populate('location')
   .then(result => {
     response.send(result)
   })
@@ -30,25 +31,42 @@ router.get('/:id', (request, response, next) => {
 //Create user
 router.post('/signup', async (request, response, next) => {
   const {body} = request
-  const {username, password, mail, location, sports, image} = body
+  const {username, password, mail, sports, image, locationId} = body
   const salt = 10
   const passwordHash = await bcrypt.hash(password, salt)
+
+  const filter = {name:locationId}
+  const location = await locationModel.findOne(filter)
+  console.log(location)
+
   const newUser = new userModel({
     username,
     passwordHash,
     mail,
     location,
     sports,
-    image
+    image,
+    locationId: location._id
   })
+
+  try {
+    const savedUser = await newUser.save()
+    location.user = location.user.concat(savedUser)
+    await location.save()
+
+    response.status(200).send(savedUser)
+  } catch (error) {
+    next(error)
+  }
+
   //TODO: - Subida de imagen
-  newUser.save()
-  .then(result => { 
-    response.status(200).send(result) 
-  })
-  .catch(error => { 
-    next(error) 
-  })
+  // newUser.save()
+  // .then(result => { 
+  //   response.status(200).send(result) 
+  // })
+  // .catch(error => { 
+  //   next(error) 
+  // })
 })
 
 //Update user

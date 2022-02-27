@@ -3,7 +3,7 @@ const router = require('express').Router()
 
 //list location in Create Account
 router.get('/',(request,response,next) => {
-  locationModel.find({})
+  locationModel.find({}).populate('user')
   .then(result => {
     response.status(200).send(result)
   })
