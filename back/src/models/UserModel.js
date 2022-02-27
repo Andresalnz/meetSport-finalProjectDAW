@@ -27,13 +27,11 @@ const userSchema = new Schema ({
     type: String,
     required: "Location is required"
   },
-  sports: {
-    type: [String],
-    required: 'Sport is required',
-   // trim: true,
-    lowercase: true,
+  sports: [{
+    type:[String],
+    ref: 'Sport'
 
-  },
+  }],
   image: {
     type: String,
     required: false
