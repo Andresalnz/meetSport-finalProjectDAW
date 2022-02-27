@@ -15,6 +15,17 @@ router.get('/', (request, response, next) => {
   })
 })
 
+router.get('/:id', (request, response, next) => {
+  const {id} = request.params
+  userModel.findById({_id:id})
+  .then(result => {
+    response.send(result)
+  })
+  .catch(err => {
+    next(err.name)
+  })
+})
+
 
 //Create user
 router.post('/signup', async (request, response, next) => {
