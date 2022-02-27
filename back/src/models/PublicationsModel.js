@@ -13,11 +13,11 @@ const publicationSchema = new Schema ({
     trim: true,
     required: 'Descripcion obligatoria'
   },
-  place: {
-    type: String,
-    trim: true,
-    required: true,
-  },
+  // place: {
+  //   type: String,
+  //   trim: true,
+  //   required: true,
+  // },
   location: {
     type: String,
     required: true
@@ -38,6 +38,10 @@ const publicationSchema = new Schema ({
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
+  },
+  sport: {
+    type: Schema.Types.ObjectId,
+    ref: 'Sport'
   }
 })
 

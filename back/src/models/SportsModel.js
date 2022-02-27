@@ -5,6 +5,10 @@ const sportSchema = new Schema ({
     type: String,
     trim: true
   },
+  publications: [{ 
+    type: Schema.Types.ObjectId,
+    ref: 'Publication'
+  }]
 
   //usuarios:{},
 
