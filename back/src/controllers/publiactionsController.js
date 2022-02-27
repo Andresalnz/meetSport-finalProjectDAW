@@ -39,7 +39,7 @@ router.post('/new', userToken, async  (request, response, next) => {
     participants,
     price,
     user: user._id,
-    sport: sport.name
+    sport: sport._id
   })
   
 try {
