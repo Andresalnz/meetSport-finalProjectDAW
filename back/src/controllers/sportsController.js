@@ -21,8 +21,8 @@ router.post('/new', (request, response, next) => {
 })
 
 //list Sport in Create Account
-router.get('/signup',(request,response,next) => {
-  sportModel.find({})
+router.get('/',(request,response,next) => {
+  sportModel.find({}).populate('publications')
   .then(result => {
     response.status(200).send(result)
   })
@@ -32,13 +32,13 @@ router.get('/signup',(request,response,next) => {
 })
 
 //list Sport in Create Account
-router.get('/profile',(request,response,next) => {
-  sportModel.find({})
-  .then(result => {
-    response.status(200).send(result)
-  })
-  .catch(error => {
-    next(error)
-  })
-})
+// router.get('/profile',(request,response,next) => {
+//   sportModel.find({})
+//   .then(result => {
+//     response.status(200).send(result)
+//   })
+//   .catch(error => {
+//     next(error)
+//   })
+// })
 module.exports = router
