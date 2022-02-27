@@ -15,12 +15,18 @@ import {
 import useCreateRequest from '../hooks/useCreateRequest';
 import { useState } from 'react';
 import { Link} from "react-router-dom";
+import useListSports  from '../hooks/useListSports'
 
 export default function CreateRequest() {
   
   const sendRequest = useCreateRequest();
   const [timeValue, setTimeValue] = useState('');
   const [dateValue, setDateValue] = useState('');
+  const listSports = useListSports()
+
+ const h =listSports.map((i)=>{ return i.name  })
+  
+
   const daysInMonth = month => new Date(2019, month, 0).getDate();
   return (
     
@@ -45,7 +51,7 @@ export default function CreateRequest() {
           <FormField label="Location" name="location" htmlFor="select" required>
             <TextInput id="requestLocation" name="location" placeholder="Campo hondo" />
           </FormField>
-          <RadioButtonGroup direction='row' name="place" options={["Cádiz","Sevilla","Malaga","Almeria","Córdoba","Huelva","Jaén","Granada"]}></RadioButtonGroup>        
+          <RadioButtonGroup direction='row' name="sportId" options={h}></RadioButtonGroup>        
             <Box gap="small" width="medium" direction="row" margin={{vertical:'small'}}>
             <FormField justify="end" name="date" htmlFor="requestDate" required> 
                 <MaskedInput

@@ -8,7 +8,7 @@ import {
 import { Outlet } from 'react-router-dom';
 import MSCard from '../components/MSCard';
 import useListRequest  from '../hooks/useListRequest'
-
+import { useAuth } from '../hooks/useAuth';
 
 
 
@@ -16,6 +16,11 @@ export default function Home() {
 
   const size = useContext(ResponsiveContext);
   const listPublication = useListRequest()
+  // const actionAdd = () => {
+  //   console.log('añadir a publicacion')
+
+    
+  // }
   
   return <>
       <Grid columns={size !== 'small' ? 'medium' : '100%'} gap="large">
@@ -26,7 +31,11 @@ export default function Home() {
           location={card.location} 
           date={card.date} 
           participants={card.participants} 
-          price={card.price}>
+          price={card.price}
+          sport={card.sport.name}
+          user = {card.user.username}
+          //action = {actionAdd}
+          >
           </MSCard>
         ))}
       </Grid>
