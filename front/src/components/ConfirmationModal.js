@@ -8,15 +8,20 @@ export default function ConfirmationModal(props) {
   const {user}  = useAuth() 
   //const sendRequest = useRemoveRequest();
   
-  const actionOk = (id) => {
-    console.log('funicona picha')
-    if (id){
+  const actionOk = (id,idUser,logout) => {
+    if (id ){
       props.action(id)
-    }
+    } else if(idUser) {
+      props.actionUser(id)
+    } 
+  
    
     props.close()
 
   }
+
+  
+  
   return (
        <Grommet>
             {props.open && (
@@ -33,7 +38,7 @@ export default function ConfirmationModal(props) {
                     justify="end"
                     pad={{ top: 'medium', bottom: 'small' }}
                 >
-                    <Button label="Sep" onClick={() => actionOk( props.id)} />
+                    <Button label="Sep" onClick={() => actionOk( props.id,user.userId)} />
                     <Button label="Nop" onClick={props.close} color="dark-3" />
                   </Box>
                 </Box>
