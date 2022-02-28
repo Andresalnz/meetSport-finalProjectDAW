@@ -17,10 +17,12 @@ router.get('/', (request, response, next) => {
 })
 
 router.get('/:id', (request, response, next) => {
+  console.log('aqui estamos')
   const {id} = request.params
-  userModel.findById({_id:id}).populate('location')
+  userModel.findById({_id:id})
+  //console.log('nooooo', _id)
   .then(result => {
-    response.send(result)
+    response.status(200).send(result)
   })
   .catch(err => {
     next(err.name)
@@ -88,7 +90,7 @@ router.put('/account', (request, response) => {
 
 
 //Delete user
-router.delete('/account', (request,response, next) => {
+router.delete('/delete', (request,response, next) => {
   const {id} = request.body
   userModel.findByIdAndDelete({_id:id})
   .then(result => { response.status(200).send(result) })

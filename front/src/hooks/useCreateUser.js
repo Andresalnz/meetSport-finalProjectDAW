@@ -24,7 +24,7 @@ export default function useCreateUser() {
     console.log('request: ', request);
     if (request) {
       postUser('http://localhost:3001/user/signup', request);
-      //document.location.href = 'http://localhost:3000/home';
+      navigate('/login')
     }
     
   }, [request]);
