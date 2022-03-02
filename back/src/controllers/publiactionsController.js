@@ -56,7 +56,17 @@ try {
 //List all publications
 router.get('/', (request, response, next) => {
   publicationModel.find({})
-    .populate('user').populate('sport').populate('city')
+    .populate('user',{
+      username: 1,
+      mail: 1,
+
+    })
+    .populate('sport', {
+      name: 1
+    })
+    .populate('city', {
+      name: 1
+    })
     .then(result => {
        response.status(200).send(result)
     })

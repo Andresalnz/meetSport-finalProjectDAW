@@ -1,16 +1,19 @@
 import {useState, useEffect} from 'react'
+import { useAuth } from './useAuth';
 
 export default function useRemoveRequest() {
 
   const [publicationId, setpublicationId] = useState(null);
-  
+  const {user} = useAuth()
+
     useEffect(() => {
       if(publicationId) {
         async function RemoveRequestwithId(url = '',dataId = {}){
           await fetch(url, {
             method: 'DELETE',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization':`Bearer ${user.token}`
             },
             body: JSON.stringify(dataId) 
           })

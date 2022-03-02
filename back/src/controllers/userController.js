@@ -32,7 +32,7 @@ router.get('/:id', (request, response, next) => {
 //Create user
 router.post('/signup', async (request, response, next) => {
   const {body} = request
-  const {username, password, mail, sports, image, locationId} = body
+  const {username, password, mail, locationId} = body
 
   //options bcrypt password
   const salt = 10
@@ -45,8 +45,6 @@ router.post('/signup', async (request, response, next) => {
     passwordHash,
     mail,
     location,
-    sports,
-    image,
     locationId: location._id
   })
 
@@ -61,22 +59,21 @@ router.post('/signup', async (request, response, next) => {
 })
 
 //Update user
-router.put('/account', (request, response) => {
+router.put('/update', (request, response,next) => {
   const {body} = request
-  const {id, username, mail, location, sports} = body
+  const {id, username, mail, location} = body
   const options = { new: true, rawResult: false } //rawResult: Para verificar que mongoDB encontró y actualizó el documento
   const filter = { _id:id }
   const updateUser = {
     username,
     mail,
-    location,
-    sports
-  } 
+    location
+  }
   userModel.findOneAndUpdate(filter, updateUser, options)
     .then(result => { 
       response.status(200).send(result) 
     })
-    .catch(error => { response.send(error.name) })
+    .catch(error => { next(error) })
 })
 
 
