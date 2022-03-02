@@ -2,34 +2,32 @@ import {useNavigate} from 'react-router-dom'
 import {useState} from 'react'
 import { useAuth } from './useAuth';
 
-
 export default function useSignIn() {
+
   const navigate = useNavigate();
   const [signInErrorState, setSignInError] = useState({error:false, message:'OK'});
   const {setUser} = useAuth({})
-  
 
   const url = 'http://localhost:3001/signin'
+
   const userSignIn =  (data) => {
     setSignInError({error:false, message:'OK'})
     fetch(url, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *cors, same-origin
+      method: 'POST', 
+      mode: 'cors', 
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'  
       },
-      body: JSON.stringify(data) // body data type must match "Content-Type" header
+      body: JSON.stringify(data) 
     })
     .then((result) => {
-     
       if (result.ok) {
-       return result.json()
+        return result.json()
       } else {
-        throw new Error('NOO LOGIN')
+        throw new Error('NO LOGIN')
       }
     })
-      
     .then((result) =>{
       sessionStorage.setItem('token', result.token)
       sessionStorage.setItem('userId', result.id)
@@ -41,7 +39,6 @@ export default function useSignIn() {
       setSignInError({error:true, message:'Error login'})
     })
   }
-
-
+  
   return [userSignIn, signInErrorState ]
 }

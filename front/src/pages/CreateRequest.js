@@ -7,15 +7,15 @@ import {
   FormField, 
   TextArea, 
   TextInput, 
-  DateInput,
   MaskedInput,
   Form,
   RadioButtonGroup,
 } from 'grommet';
-import useCreateRequest from '../hooks/useCreateRequest';
 import { useState } from 'react';
 import { Link} from "react-router-dom";
+import useCreateRequest from '../hooks/useCreateRequest';
 import useListSports  from '../hooks/useListSports'
+import useListLocations from '../hooks/useListLocations';
 
 export default function CreateRequest() {
   
@@ -23,13 +23,13 @@ export default function CreateRequest() {
   const [timeValue, setTimeValue] = useState('');
   const [dateValue, setDateValue] = useState('');
   const listSports = useListSports()
+  const listLocations = useListLocations()
 
- const h =listSports.map((i)=>{ return i.name  })
-  
-
+  const sports =listSports.map((sport)=>{ return sport.name  })
+  const locations=listLocations.map((location)=>{ return location.name  })
   const daysInMonth = month => new Date(2019, month, 0).getDate();
+
   return (
-    
     <Layer
       id="hello world"
       position="center"
@@ -38,7 +38,8 @@ export default function CreateRequest() {
         <Form
           validate="blur"
           onReset={event => console.log(event)}
-          onSubmit={({ value }) => sendRequest(value)}>
+          onSubmit={({ value }) => sendRequest(value)}
+        >
           <Heading level={3} margin={{ top: '0', bottom: '30px'}}>
             Create a request
           </Heading>
@@ -46,14 +47,15 @@ export default function CreateRequest() {
             <TextInput id="requestTitle" name="title" placeholder="Basket session with friends..."  />
           </FormField>
           <FormField label="Description of activity" name="description" htmlFor="select" required>
-            <TextArea id="requestDescription" name="description" placeholder="Nos hacen falta 3 tios más para un parti..." />
+            <TextArea id="requestDescription" name="description" placeholder="Nos hacen falta 3 tios más para un partido..." />
           </FormField>
           <FormField label="Location" name="location" htmlFor="select" required>
-            <TextInput id="requestLocation" name="location" placeholder="Campo hondo" />
+            <TextInput id="requestLocation" name="location" placeholder="Alberti" />
           </FormField>
-          <RadioButtonGroup direction='row' name="sportId" options={h}></RadioButtonGroup>        
+          <RadioButtonGroup margin={{bottom:'small'}} direction='row' name="sportId" options={sports}></RadioButtonGroup> 
+          <RadioButtonGroup direction='row' name="cityId" options={locations}></RadioButtonGroup>        
             <Box gap="small" width="medium" direction="row" margin={{vertical:'small'}}>
-            <FormField justify="end" name="date" htmlFor="requestDate" required> 
+              <FormField justify="end" name="date" htmlFor="requestDate" required> 
                 <MaskedInput
                   name="date"
                   id="requestDate"
@@ -62,7 +64,7 @@ export default function CreateRequest() {
                       length: [1, 2],
                       options: Array.from({ length: 12 }, (v, k) => k + 1),
                       regexp: /^1[0,1-2]$|^0?[1-9]$|^0$/,
-                      placeholder: 'dd',
+                      placeholder: 'mm',
                     },
                     { fixed: '/' },
                     {
@@ -73,7 +75,7 @@ export default function CreateRequest() {
                         },                  (v, k) => k + 1,
                     ),
                       regexp: /^[1-2][0-9]$|^3[0-1]$|^0?[1-9]$|^0$/,
-                      placeholder: 'mm',
+                      placeholder: 'dd',
                     },
                     
                   ]}
@@ -81,50 +83,50 @@ export default function CreateRequest() {
                   onChange={event => setDateValue(event.target.value)}
                 />
               </FormField>
-              <FormField justify="end" name="hour" htmlFor="requestHour" required>
-                <MaskedInput
-                  name="hour"
-                  id="requestHour"
-                  mask={[
-                    {
-                      length: [1, 2],
-                      options: [
-                        '1',
-                        '2',
-                        '3',
-                        '4',
-                        '5',
-                        '6',
-                        '7',
-                        '8',
-                        '9',
-                        '10',
-                        '11',
-                        '12',
-                      ],
-                      regexp: /^1[1-2]$|^[0-9]$/,
-                      placeholder: 'hh',
-                    },
-                    { fixed: ':' },
-                    {
-                      length: 2,
-                      options: ['00', '15', '30', '45'],
-                      regexp: /^[0-5][0-9]$|^[0-9]$/,
-                      placeholder: 'mm',
-                    },
-                    { fixed: ' ' },
-                    {
-                      length: 2,
-                      options: ['am', 'pm'],
-                      regexp: /^[ap]m$|^[AP]M$|^[aApP]$/,
-                      placeholder: 'ap',
-                    },
-                  ]}
-                  value={timeValue}
-                  onChange={event => setTimeValue(event.target.value)}
-                  required
-                />
-              </FormField>
+                <FormField justify="end" name="hour" htmlFor="requestHour" required>
+                  <MaskedInput
+                    name="hour"
+                    id="requestHour"
+                    mask={[
+                      {
+                        length: [1, 2],
+                        options: [
+                          '1',
+                          '2',
+                          '3',
+                          '4',
+                          '5',
+                          '6',
+                          '7',
+                          '8',
+                          '9',
+                          '10',
+                          '11',
+                          '12',
+                        ],
+                        regexp: /^1[1-2]$|^[0-9]$/,
+                        placeholder: 'hh',
+                      },
+                      { fixed: ':' },
+                      {
+                        length: 2,
+                        options: ['00', '15', '30', '45'],
+                        regexp: /^[0-5][0-9]$|^[0-9]$/,
+                        placeholder: 'mm',
+                      },
+                      { fixed: ' ' },
+                      {
+                        length: 2,
+                        options: ['am', 'pm'],
+                        regexp: /^[ap]m$|^[AP]M$|^[aApP]$/,
+                        placeholder: 'ap',
+                      },
+                    ]}
+                    value={timeValue}
+                    onChange={event => setTimeValue(event.target.value)}
+                    required
+                  />
+                </FormField>
             </Box>
             <Box gap="small" width="medium" direction="row" margin={{vertical:'small'}}>
               <FormField label="Participants" name="participants" htmlFor="requestParticipants" width="fit-content">
@@ -158,7 +160,7 @@ export default function CreateRequest() {
           pad={{ top: 'medium', bottom: 'small' }}
         >
           <Link to="/">
-            <Button secondary label="Cancel" color="dark-3" />
+            <Button  label="Cancel"  color="button" />
           </Link>
           <Button
             type="submit"
@@ -168,12 +170,11 @@ export default function CreateRequest() {
               </Text>
             }
             primary
+            color="button"
           />
         </Box>
         </Form>
       </Box>
-     
     </Layer>
-   
   );
 }

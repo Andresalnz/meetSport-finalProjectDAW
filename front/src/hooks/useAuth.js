@@ -7,8 +7,7 @@ export const AuthProvider = ({children}) => {
   const valueToken = sessionStorage.getItem('token') // 
   const valueUserId = sessionStorage.getItem('userId')
   const [user, setUser] = useState({token: valueToken, userId: valueUserId});
-  
-  
+
   return (
     <AuthContext.Provider value={{user, setUser}}>
       {

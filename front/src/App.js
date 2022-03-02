@@ -19,10 +19,9 @@ const theme = {
       weight: 400,
     },
     colors: {
-      focus: 'dark-1',
+      button: '#2874A6',
     },
-    
-  },
+  },  
   formField: {
     label: {
       color: 'dark-3',
@@ -50,9 +49,8 @@ function App() {
               <Route path="home" element={<Home />} > 
                 <Route path="create-request" element={<RequireAuth> <CreateRequest /></RequireAuth>} />
               </Route>
-              
               <Route path="create-request" element={<Home />} >
-                <Route index element={<RequireAuth> <CreateRequest /></RequireAuth>} />
+                <Route index element={<RequireAuth> <CreateRequest /> </RequireAuth>} />
               </Route>
               <Route path="sign-up" element = {<SignUp />}></Route>
               <Route path="login" element = {<SignIn />}></Route>
