@@ -1,9 +1,9 @@
 const locationModel = require('../models/LocationModel')
 const router = require('express').Router()
 
-//list location in Create Account
+//list location
 router.get('/',(request,response,next) => {
-  locationModel.find({}).populate('user')
+  locationModel.find({}).populate('user').populate('publications')
   .then(result => {
     response.status(200).send(result)
   })

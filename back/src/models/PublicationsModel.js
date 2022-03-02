@@ -1,40 +1,46 @@
 const {Schema,model} = require('mongoose')
 
 const publicationSchema = new Schema ({
+
   title: {
     type: String,
     required: 'Titulo obligatorio',
-    maxlength: [30, "Pasado el limite de palabras"],
     trim: true,
+    required: 'Tiutlo obligatorio'
   },
+
   description: {
     type: String,
-    maxlength: [100, "Pasado el limite de palabras"],
     trim: true,
     required: 'Descripcion obligatoria'
   },
-  // place: {
-  //   type: String,
-  //   trim: true,
-  //   required: true,
-  // },
+  
   location: {
     type: String,
     required: true
   },
+
   date: {
     type: Date,
     required: 'Fecha obligatoria',
   },
+
   participants: {
     type: Number,
     required: 'Número de participantes obligatorio',
     max: [20,"Demasiadas personas"]
   },
+  
   price: {
     type: Number,
     required: 'Precio obligatorio',
   },
+
+  city: {
+    type: Schema.Types.ObjectId,
+    ref: 'Location'
+  },
+
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'

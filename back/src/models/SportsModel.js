@@ -5,6 +5,7 @@ const sportSchema = new Schema ({
     type: String,
     trim: true
   },
+
   publications: [{ 
     type: Schema.Types.ObjectId,
     ref: 'Publication'
@@ -14,10 +15,6 @@ const sportSchema = new Schema ({
     type: Schema.Types.ObjectId,
     ref: 'User'
   }]
-
-  //usuarios:{},
-
-
 })
 
 sportSchema.set('toJSON',{

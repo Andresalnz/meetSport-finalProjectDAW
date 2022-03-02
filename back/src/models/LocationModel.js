@@ -10,9 +10,11 @@ const locationSchema = new Schema ({
     type: Schema.Types.ObjectId,
     ref: 'User'
   }],
-
-  //usuarios:{},
-  //publicaciones:{}
+  
+  publications: [{ 
+    type: Schema.Types.ObjectId,
+    ref: 'Publication'
+  }],
 })
 
 locationSchema.set('toJSON',{
