@@ -52,8 +52,8 @@ export default function CreateRequest() {
           <FormField label="Location" name="location" htmlFor="select" required>
             <TextInput id="requestLocation" name="location" placeholder="Alberti" />
           </FormField>
-          <RadioButtonGroup margin={{bottom:'small'}} direction='row' name="sportId" options={sports}></RadioButtonGroup> 
-          <RadioButtonGroup direction='row' name="cityId" options={locations}></RadioButtonGroup>        
+          <RadioButtonGroup margin={{bottom:'small'}} direction='row' name="sportId" options={sports}/>
+          <RadioButtonGroup direction='row' name="cityId" options={locations}/>       
             <Box gap="small" width="medium" direction="row" margin={{vertical:'small'}}>
               <FormField justify="end" name="date" htmlFor="requestDate" required> 
                 <MaskedInput
@@ -176,5 +176,6 @@ export default function CreateRequest() {
         </Form>
       </Box>
     </Layer>
+    
   );
 }

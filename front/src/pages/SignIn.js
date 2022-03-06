@@ -22,7 +22,7 @@ export default function Login(props) {
             <TextInput id="username" name="username" placeholder="Nombre de usuario o email"/> 
           </FormField>
           <FormField name="password" label="Contraseña" htmlFor="password" required>
-            <TextInput id="password" name="password" placeholder="Contraseña"/>
+            <TextInput type="password" id="password" name="password" placeholder="Contraseña"/>
           </FormField>
           <Box align="center" pad="medium">
             <Button 

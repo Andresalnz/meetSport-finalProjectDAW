@@ -4,7 +4,7 @@ import useUser from '../hooks/useUser'
 
 export default function MSInformationUser(props) {
 
-  const use = useUser()
+  const userInfo = useUser()
 
   return(
     <Box
@@ -16,13 +16,13 @@ export default function MSInformationUser(props) {
       <Heading  alignSelf='center' margin={{top:'small'}} level="2">
         Informacion de usuario
       </Heading>
-      <Box direction='row' margin={{vertical:'small'}}>
+      <Box direction='column' margin={{vertical:'small'}}>
         <Text margin={{right:'small'}}>Nombre de usuario:</Text>
-        <Text margin='none' weight='bold'> {use.username} </Text>
+        <Text margin='none' weight='bold'> {userInfo.username} </Text>
       </Box>
-      <Box direction='row'>
+      <Box direction='column'>
         <Text margin={{right:'small'}}>Email del usuario:</Text>
-        <Text margin='none' weight='bold'> {use.mail} </Text>
+        <Text margin='none' weight='bold'> {userInfo.mail} </Text>
       </Box>
     </Box>
   )
