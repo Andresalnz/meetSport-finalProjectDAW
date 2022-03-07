@@ -12,6 +12,9 @@ router.get('/', (request, response, next) => {
     .populate('sports',{
       user : 0
     })
+    .populate('location', {
+      user: 0
+    })
     .then(result => {
       response.send(result)
     })
