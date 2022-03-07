@@ -3,11 +3,15 @@ const userModel = require('../models/UserModel')
 const router = require('express').Router()
 const bcrypt = require ('bcrypt')
 const locationModel = require('../models/LocationModel')
+const sportModel = require('../models/SportsModel')
 
 //list users
 router.get('/', (request, response, next) => {
   userModel.find({})
     .populate('publications')
+    .populate('sports',{
+      user : 0
+    })
     .then(result => {
       response.send(result)
     })
@@ -32,25 +36,31 @@ router.get('/:id', (request, response, next) => {
 //Create user
 router.post('/signup', async (request, response, next) => {
   const {body} = request
-  const {username, password, mail, locationId} = body
+  const {username, password, mail, locationId, sportId} = body
 
   //options bcrypt password
   const salt = 10
   const passwordHash = await bcrypt.hash(password, salt)
 
   const location = await locationModel.findOne({name:locationId})
+  const sport = await sportModel.findOne({name:sportId})
 
   const newUser = new userModel({
     username,
     passwordHash,
     mail,
     location,
-    locationId: location._id
+    locationId: location._id,
+    sportId:sport._id
   })
 
   try {
     const savedUser = await newUser.save()
     location.user = location.user.concat(savedUser)
+    sport.user = sport.user.concat(savedUser)
+    savedUser.sports = savedUser.sports.concat(sport)
+    await savedUser.save()
+    await sport.save()
     await location.save()
     response.status(200).send(savedUser)
   } catch (error) {

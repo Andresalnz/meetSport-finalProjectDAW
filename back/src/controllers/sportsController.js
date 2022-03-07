@@ -7,6 +7,7 @@ router.get('/',(request,response,next) => {
     .populate('publications', {
       sport: 0
     })
+    .populate('user')
     .then(result => {
       response.status(200).send(result)
     })

@@ -10,11 +10,14 @@ import {
 import { Yoga } from 'grommet-icons';
 import useListLocations from '../hooks/useListLocations';
 import useCreateUser from '../hooks/useCreateUser'
+import useListSports from '../hooks/useListSports'
 
 export default function SignUp(props) {
 
   const listLocations = useListLocations()
+  const listsports = useListSports()
   const locations=listLocations.map((location)=>{ return location.name  })
+  const sports = listsports.map((sport)=>{ return sport.name  })
   const sendRequest = useCreateUser()
 
   //Clear inputs
@@ -47,13 +50,20 @@ export default function SignUp(props) {
           <Box align='start'  margin={{top:'20px'}}>
             <Box direction='row' gap='small'>
               <FormField name="subscribe">
-                <Text id="chooseSport">Coloca donde vives</Text>
+                <Text id="chooseSport">Coloca donde vives y tus deportes favoritos</Text>
                 <Box direction='row' margin={{vertical:"10px"}}>
                   <RadioButtonGroup 
                     id="locations" 
                     name="locationId" 
                     margin={{right:'10px'}}  
                     options={locations} 
+                    direction='column'
+                  /> 
+                  <RadioButtonGroup 
+                    id="locations" 
+                    name="sportId" 
+                    margin={{right:'10px'}}  
+                    options={sports} 
                     direction='column'
                   /> 
                 </Box>

@@ -33,11 +33,11 @@ const userSchema = new Schema ({
     ref: 'Location'
   },
 
-  sports: [{
-    type:[String],
+  sports: {
+    type: Schema.Types.ObjectId,
     ref: 'Sport'
 
-  }],
+  },
 
   image: {
     type: String,
