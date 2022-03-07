@@ -25,7 +25,9 @@ router.get('/:id', (request, response, next) => {
   const {id} = request.params
   userModel.findById({_id:id})
     .populate('publications')
-    .populate('location')
+    .populate('location', {
+      user: 0
+    })
     .populate('sports',{
       user : 0
     })
