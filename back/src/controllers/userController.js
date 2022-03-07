@@ -24,6 +24,11 @@ router.get('/', (request, response, next) => {
 router.get('/:id', (request, response, next) => {
   const {id} = request.params
   userModel.findById({_id:id})
+    .populate('publications')
+    .populate('location')
+    .populate('sports',{
+      user : 0
+    })
     .then(result => {
       response.status(200).send(result)
     })
@@ -58,8 +63,6 @@ router.post('/signup', async (request, response, next) => {
     const savedUser = await newUser.save()
     location.user = location.user.concat(savedUser)
     sport.user = sport.user.concat(savedUser)
-    savedUser.sports = savedUser.sports.concat(sport)
-    await savedUser.save()
     await sport.save()
     await location.save()
     response.status(200).send(savedUser)

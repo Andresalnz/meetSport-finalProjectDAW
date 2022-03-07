@@ -5,6 +5,7 @@ import useUser from '../hooks/useUser'
 export default function MSInformationUser(props) {
 
   const userInfo = useUser()
+  console.log(userInfo)
 
   return(
     <Box
@@ -23,6 +24,14 @@ export default function MSInformationUser(props) {
       <Box direction='column'>
         <Text margin={{right:'small'}}>Email del usuario:</Text>
         <Text margin='none' weight='bold'> {userInfo.mail} </Text>
+      </Box>
+      <Box direction='column' margin={{vertical:'small'}}>
+        <Text margin={{right:'small'}} >Soy de:</Text>
+        <Text margin='none' weight='bold'> {userInfo.location.name} </Text>
+      </Box>
+      <Box direction='column'>
+        <Text margin={{right:'small'}}>Mi deporte favorito es:</Text>
+        <Text margin='none' weight='bold'> {userInfo.sports.name} </Text>
       </Box>
     </Box>
   )
