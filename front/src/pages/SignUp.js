@@ -59,6 +59,7 @@ export default function SignUp(props) {
                     options={locations} 
                     direction='column'
                   /> 
+                  {/* Sports */}
                   <RadioButtonGroup 
                     id="locations" 
                     name="sportId" 
