@@ -68,11 +68,8 @@ export default function Profile (props) {
         <Tab title='Mis publicaciones' >
           <Grid columns={size !== 'small' ? 'medium' : '100%'} gap="large">
             {
-              listPublication.length === 0 ?
-                <Header>Aún no has creado ninguna publicacion</Header>
-              :
               listPublication.map((card, index) => (
-                user.userId === card.user.id &&
+                user.userId === card.user.id && card.user.pubications.length !== 0 ?
                 <MSCard
                   id= {card.id}
                   title={card.title}
@@ -87,6 +84,8 @@ export default function Profile (props) {
                   remove = {remove}
                   action= {actionRemove}
                 /> 
+                :
+                <Header>Todavia no has creado ninguna publicación</Header>
             ))}
           </Grid>
         </Tab>
