@@ -10,6 +10,7 @@ import {
   CardHeader,
   Heading,
   Paragraph,
+  Anchor,
 } from 'grommet';
 import ConfirmationModal from './ConfirmationModal';
 
@@ -34,7 +35,7 @@ export default function MSCard(props) {
         <Heading  margin={{top:'small', left:'small', bottom:'none', right:'none'}} level="2">
           {
 
-          'Soy '+  props.user
+          'Me llamo '+  props.user + ' y...'
 
           }
         </Heading>
@@ -68,7 +69,13 @@ export default function MSCard(props) {
            props.remove ? 
             <Button primary color='button' icon={<Trash />} label="Delete" onClick={() => setOpen(true)} />
             : 
-            <Button primary color='button' icon={<Add />} label="Add" onClick={() => setOpen(true)} />
+            // <Button primary color='button' icon={<Add />} label="Add" onClick={() => setOpen(true)} />
+            <Heading level='3'> 
+            {    
+              'Escribeme, este es mi correo, ¡Unete!: '
+            }
+            <Anchor>{props.mail}</Anchor>
+            </Heading>
           }
           
           { /* Modal de confirmacion */ }

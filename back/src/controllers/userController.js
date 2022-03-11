@@ -1,7 +1,8 @@
 const { application } = require('express')
-const userModel = require('../models/UserModel')
 const router = require('express').Router()
 const bcrypt = require ('bcrypt')
+const userToken = require('../middleware/userToken')
+const userModel = require('../models/UserModel')
 const locationModel = require('../models/LocationModel')
 const sportModel = require('../models/SportsModel')
 
@@ -77,7 +78,7 @@ router.post('/signup', async (request, response, next) => {
 })
 
 //Update user
-router.put('/update', (request, response,next) => {
+router.put('/update', userToken, (request, response,next) => {
   const {body} = request
   const {id, username, mail, location} = body
   const options = { new: true, rawResult: false } //rawResult: Para verificar que mongoDB encontró y actualizó el documento
@@ -109,7 +110,7 @@ router.delete('/delete', (request,response, next) => {
 //search user by name or sport
 router.get('/:search',(request, response) => {
   const {search} = request.params
-  userModel.find({$or:[{username:search},{sports:search}]})
+  userModel.find({username:search})
     .then(result => { 
       response.status(200).send(result) 
     })

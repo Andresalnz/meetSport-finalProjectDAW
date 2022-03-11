@@ -1,8 +1,8 @@
 const router = require('express').Router()
 const mongoose = require('mongoose')
 const userToken = require('../middleware/userToken')
-const publicationModel = require('../models/PublicationsModel')
 const userModel = require('../models/UserModel')
+const publicationModel = require('../models/PublicationsModel')
 const sportModel = require('../models/SportsModel')
 const locationModel = require('../models/LocationModel')
 

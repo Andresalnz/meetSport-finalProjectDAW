@@ -35,7 +35,7 @@ export default function ConfirmationModal(props) {
                 primary 
                 color='#2874A6' 
                 label="Sep" 
-                onClick={() => actionOk( props.id,user.userId)} 
+                onClick={() => actionOk( props.id)} 
               />
               <Button  
                 color='#2874A6'

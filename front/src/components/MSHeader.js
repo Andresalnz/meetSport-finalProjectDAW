@@ -8,14 +8,14 @@ const MSHeaderAnchor = styled(Anchor)`
   display: flex;
 `
 const items = [
-  { label: <Text size="medium" >Home</Text>, href: "/home" },
-  { label: <Text size="medium" >Sign in</Text>, href: "/login" },
-  { label: <Text size="medium" >Sign up</Text>, href: "/sign-up" }
+  { label: <Text size="medium" >Inicio</Text>, href: "/home" },
+  { label: <Text size="medium" >Iniciar Sesion</Text>, href: "/login" },
+  { label: <Text size="medium" >Crear Cuenta</Text>, href: "/sign-up" }
 ];
 
 const userItems = [
-  { label: <Text size="medium" >Home</Text>, href: '/home' },
-  { label: <Text size="medium" >Profile</Text>, href: '/profile' },
+  { label: <Text size="medium" >Inicio</Text>, href: '/home' },
+  { label: <Text size="medium" >Perfil</Text>, href: '/profile' },
 ];
 
 const padHeader = {
@@ -57,7 +57,7 @@ export default function MSHeader() {
               primary
               color="button"
               pad="small"
-              label={<Text size="medium" color="light-1" weight="bold" >Create Request</Text>}
+              label={<Text size="medium" color="light-1" weight="bold" >¡Crea tu Publicacion!</Text>}
               onClick={() => {}}
             />
           </Link>

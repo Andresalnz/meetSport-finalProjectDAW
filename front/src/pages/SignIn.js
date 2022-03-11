@@ -18,8 +18,8 @@ export default function Login(props) {
       </Box>
       <Box  width="medium" >
         <Form  onSubmit={({value}) => signIn(value)}>
-          <FormField name="username" label="Nombre de usuario o email" htmlFor="username"  required messages={{invalid:"inva",required:"requir"}} > 
-            <TextInput id="username" name="username" placeholder="Nombre de usuario o email"/> 
+          <FormField name="username" label="Nombre de usuario" htmlFor="username"  required messages={{invalid:"inva",required:"requir"}} > 
+            <TextInput id="username" name="username" placeholder="Nombre de usuario"/> 
           </FormField>
           <FormField name="password" label="Contraseña" htmlFor="password" required>
             <TextInput type="password" id="password" name="password" placeholder="Contraseña"/>

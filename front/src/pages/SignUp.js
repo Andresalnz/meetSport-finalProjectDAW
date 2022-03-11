@@ -44,7 +44,7 @@ export default function SignUp(props) {
               <TextInput name='mail'id="mail" placeholder='Mail' required></TextInput>
           </FormField>
           <FormField name='password' label='Contraseña' margin={{top:"20px"}}>
-              <TextInput name='password' id="password" placeholder='Contraseña' required></TextInput>
+              <TextInput type='password' name='password' id="password" placeholder='Contraseña' required></TextInput>
           </FormField>
         {/*Location */}
           <Box align='start'  margin={{top:'20px'}}>

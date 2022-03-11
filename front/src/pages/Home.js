@@ -28,6 +28,7 @@ export default function Home() {
             date={card.date} 
             participants={card.participants} 
             price={card.price}
+            mail= {card.user.mail}
             sport={card.sport.name}
             user = {card.user.username}
             city = {card.city.name}

@@ -43,19 +43,19 @@ export default function CreateRequest() {
           <Heading level={3} margin={{ top: '0', bottom: '30px'}}>
             Create a request
           </Heading>
-          <FormField label="Title" name="title" htmlFor="requestTitle" required>
-            <TextInput id="requestTitle" name="title" placeholder="Basket session with friends..."  />
+          <FormField label="Titulo" name="title" htmlFor="requestTitle" required>
+            <TextInput id="requestTitle" name="title" placeholder="Partido de baloncesto..."  />
           </FormField>
-          <FormField label="Description of activity" name="description" htmlFor="select" required>
+          <FormField label="Describe tu actividad" name="description" htmlFor="select" required>
             <TextArea id="requestDescription" name="description" placeholder="Nos hacen falta 3 tios más para un partido..." />
           </FormField>
-          <FormField label="Location" name="location" htmlFor="select" required>
+          <FormField label="Localización" name="location" htmlFor="select" required>
             <TextInput id="requestLocation" name="location" placeholder="Alberti" />
           </FormField>
           <RadioButtonGroup margin={{bottom:'small'}} direction='row' name="sportId" options={sports}/>
           <RadioButtonGroup direction='row' name="cityId" options={locations}/>       
             <Box gap="small" width="medium" direction="row" margin={{vertical:'small'}}>
-              <FormField justify="end" name="date" htmlFor="requestDate" required> 
+              <FormField label='fecha' justify="end" name="date" htmlFor="requestDate" required> 
                 <MaskedInput
                   name="date"
                   id="requestDate"
@@ -83,7 +83,7 @@ export default function CreateRequest() {
                   onChange={event => setDateValue(event.target.value)}
                 />
               </FormField>
-                <FormField justify="end" name="hour" htmlFor="requestHour" required>
+                <FormField label='hora' justify="end" name="hour" htmlFor="requestHour" required>
                   <MaskedInput
                     name="hour"
                     id="requestHour"
@@ -129,7 +129,7 @@ export default function CreateRequest() {
                 </FormField>
             </Box>
             <Box gap="small" width="medium" direction="row" margin={{vertical:'small'}}>
-              <FormField label="Participants" name="participants" htmlFor="requestParticipants" width="fit-content">
+              <FormField label="Participantes" name="participants" htmlFor="requestParticipants" width="fit-content">
                 <MaskedInput
                   id="requestParticipants"
                   name="participants"
@@ -139,7 +139,7 @@ export default function CreateRequest() {
                   required
                 />
               </FormField>
-              <FormField label="Price" name="price" htmlFor="requestPrice" width="fit-content">
+              <FormField label="Precio" name="price" htmlFor="requestPrice" width="fit-content">
                 <MaskedInput
                   id="requestPrice"
                   name="price"
@@ -160,13 +160,13 @@ export default function CreateRequest() {
           pad={{ top: 'medium', bottom: 'small' }}
         >
           <Link to="/">
-            <Button  label="Cancel"  color="button" />
+            <Button  label="Cancelar"  color="button" />
           </Link>
           <Button
             type="submit"
             label={
               <Text color="white">
-                <strong>Send request</strong>
+                <strong>Crear</strong>
               </Text>
             }
             primary
