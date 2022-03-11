@@ -1,0 +1,26 @@
+PUT http://localhost:3001/publication/update
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWUxNmJjNDk5ZDViNzUyNGM3MjU4OSIsInVzZXJuYW1lIjoiYW5kcmVzIiwiaWF0IjoxNjQ3MDIxODg4LCJleHAiOjE2NDc2MjY2ODh9.JL9APDkor-0kfEfQ1sk7ovASP8TI77nSyRF_CxW08Vc
+
+{
+    "title": "publicacion_ejemplo_actualizado",
+    "description": "description_actualizada",
+    "location": "Alberti",
+    "date": "2001-01-02T12:25:00.000Z",
+    "participants": 6,
+    "price": 3,
+    "city": {
+      "name": "Cádiz",
+      "id": "620175157ad6c1fbe2a3631f"
+    },
+    "user": {
+      "username": "andres",
+      "mail": "andres@ejemplo.com",
+      "id": "621e16bc499d5b7524c72589"
+    },
+    "sport": {
+      "name": "Baloncesto",
+      "id": "62015f7d7ad6c1fbe2a3631b"
+    },
+    "id": "622b8b3e3ca37be52a08aca3"
+  }

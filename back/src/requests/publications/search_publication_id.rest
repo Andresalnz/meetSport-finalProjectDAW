@@ -1,0 +1,1 @@
+GET http://localhost:3001/publication/621e2c37c2f858103fc82cf6

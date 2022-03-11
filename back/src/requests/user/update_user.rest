@@ -1,0 +1,10 @@
+PUT http://localhost:3001/user/update
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmE0YTAyZjdmOGJlMzVmZWQzZjEwNCIsInVzZXJuYW1lIjoicHIiLCJpYXQiOjE2NDcwMjI4MzksImV4cCI6MTY0NzYyNzYzOX0.FyWsnVWZ-afa4LWzm9k3ge_0MusCDqnhzwWa881A7tQ
+
+{
+	"id": "621fed2f8722531531d7ea91",
+	"username":"rafael",
+	"mail":"rafa@gmail.com",
+	"location":"620175287ad6c1fbe2a36320"
+}

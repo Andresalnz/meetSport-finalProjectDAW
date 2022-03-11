@@ -1,0 +1,10 @@
+POST http://localhost:3001/user/signup
+Content-Type:  application/json
+
+{
+	"username":"ejemplo_user",
+	"password": "12345",
+	"mail":"ejemplo@gmail.com",
+	"locationId":"Sevilla",
+  "sportId":"Baloncesto"
+}

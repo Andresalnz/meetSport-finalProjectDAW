@@ -1,14 +1,17 @@
 POST http://localhost:3001/publication/new
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMDE4N2UwOTI5OWQzZWFhYmZiZWI2MyIsInVzZXJuYW1lIjoiYW5keSIsImlhdCI6MTY0NDUzMTU3NywiZXhwIjoxNjQ1MTM2Mzc3fQ.W3_2mf8amZ9cnpl-WOJ-Ldlgum3LfCUv2LUJepG5Mfw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWUxNmJjNDk5ZDViNzUyNGM3MjU4OSIsInVzZXJuYW1lIjoiYW5kcmVzIiwiaWF0IjoxNjQ3MDIwMTQ3LCJleHAiOjE2NDc2MjQ5NDd9.5DOUi3U0PU3am5_lBVi9xhVjX6ltKxqB4MKIR50wNM4
 
 {
-	"title": "usetoken",
+	"title": "publicacion_ejemplo",
 	"description": "description 1",
-	"place": "CAI",
-	"location":"Alberti",
-	"dateVirtual": "1-02-1990",
+	"location": "Alberti",
+	"cityId":"Cádiz",
+	"date": "1/2",
+	"hour": "1:25 pm",
 	"participants": 2,
-	"price":2.5
+	"price":2.5,
+	"userId": "621e16bc499d5b7524c72589",
+	"sportId": "Baloncesto"
 	
 }

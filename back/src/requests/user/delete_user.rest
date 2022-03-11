@@ -1,0 +1,7 @@
+DELETE http://localhost:3001/user/delete
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMmI5MGRiM2NhMzdiZTUyYTA4YWNlMSIsInVzZXJuYW1lIjoicHJ1ZSIsImlhdCI6MTY0NzAyMjY5OSwiZXhwIjoxNjQ3NjI3NDk5fQ.PPjHniT5Dxt0UvSyizR0mG2EmCrwzx5xqHffjQpdk64
+
+{
+  "id": "622b90db3ca37be52a08ace1"
+}

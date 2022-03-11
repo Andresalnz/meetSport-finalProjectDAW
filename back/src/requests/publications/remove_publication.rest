@@ -1,0 +1,7 @@
+DELETE http://localhost:3001/publication/delete
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMWUxNmJjNDk5ZDViNzUyNGM3MjU4OSIsInVzZXJuYW1lIjoiYW5kcmVzIiwiaWF0IjoxNjQ3MDIwOTcxLCJleHAiOjE2NDc2MjU3NzF9.x0ClGKooo_Ez4Z2ra_UfA9TCvOfSJ9eeq8LiP1vcbSk
+
+{
+  "id": "622b8b0b3ca37be52a08ac9b"
+}
